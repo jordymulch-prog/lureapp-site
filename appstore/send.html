@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><title>Sending screenshots</title><body style="font-family:system-ui;padding:20px">Sending screenshots to App Store Connect…
+<script>
+(async()=>{
+  const names=['m-1-map.png','m-2-friends.png','m-3-profile.png'];
+  const out=[];
+  for(const n of names){ const b=await (await fetch(n)).blob(); out.push({name:n.replace('m-','lure-'), buf: await b.arrayBuffer()}); }
+  if(window.opener){ window.opener.postMessage({lureShots:out},'https://appstoreconnect.apple.com'); document.body.textContent='Sent. You can close this tab.'; }
+  else document.body.textContent='No opener';
+})();
+</script>
