@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["SM2JG8MF5Q.com.jpool.lure"],
+        "components": [
+          { "/": "/add", "comment": "Friend invite links" },
+          { "/": "/add/*", "comment": "Friend invite links" }
+        ]
+      }
+    ]
+  }
+}

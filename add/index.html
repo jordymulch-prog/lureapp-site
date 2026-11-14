@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Join me on Lure</title>
+<meta property="og:title" content="Add me on Lure">
+<meta property="og:description" content="The live map of what's happening tonight. Tap to add me as a friend.">
+<style>
+:root{--bg:#F0562A;--ink:#1D1820}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:#fff;font-family:-apple-system,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 22px;text-align:center}
+.logo{font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:84px;line-height:1;margin-bottom:8px}
+h1{font-size:30px;line-height:1.1;margin:12px 0 10px}p{font-size:17px;line-height:1.45;margin:0 auto 26px;max-width:340px;opacity:.95}
+a.btn{display:block;width:100%;max-width:340px;margin:0 auto 12px;padding:17px 20px;border-radius:999px;font-weight:700;font-size:17px;text-decoration:none}
+.primary{background:#fff;color:var(--ink)}.secondary{background:var(--ink);color:#fff}
+.steps{font-size:14px;opacity:.9;max-width:340px;margin:16px auto 0;line-height:1.5}
+.code{font-weight:800;letter-spacing:2px}
+</style></head><body>
+<div class="logo">lure</div>
+<h1>You're invited to Lure</h1>
+<p>Social media that connects. Plan. Post. Meet.<br>Tap below to add your friend.</p>
+<a class="btn primary" id="open" href="lure://add">Open in Lure</a>
+<a class="btn secondary" href="https://apps.apple.com/nl/app/lure-social-media/id6826637316">Get Lure on the App Store</a>
+<div class="steps">New to Lure? Install it, open it once and make your account. Then come back here and tap <b>Open in Lure</b>.<br><br>Invite code: <span class="code" id="code">–</span></div>
+<script>
+var c=(new URLSearchParams(location.search).get('c')||'').replace(/[^A-Za-z0-9]/g,'').toUpperCase();
+if(c){document.getElementById('open').href='lure://add?c='+c;document.getElementById('code').textContent=c;}
+</script>
+</body></html>
