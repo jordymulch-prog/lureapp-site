@@ -1,0 +1,9 @@
+{
+  "name": "Lure HQ",
+  "short_name": "Lure HQ",
+  "start_url": "/hq/",
+  "scope": "/hq/",
+  "display": "standalone",
+  "background_color": "#FAF5EE",
+  "theme_color": "#F0562A"
+}

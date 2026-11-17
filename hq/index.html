@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Lure HQ">
+<meta name="theme-color" content="#FAF5EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C0B12" media="(prefers-color-scheme: dark)">
+<title>Lure HQ</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF5EE; --panel: #FFFFFF; --alt: #F1EBE2; --line: #E8E0D4; --text: #1C1A22; --muted: #6E687A; --faint: #A39DB0;
+  --lure: #F0562A; --lure-soft: #FCE3D9; --good: #1F9D63; --bad: #E5484D; --violet: #7A6CF0;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0C0B12; --panel: #17151F; --alt: #201D2A; --line: #2A2734; --text: #F6F2EC; --muted: #A39DB0; --faint: #6E687A;
+    --lure: #FF6A3D; --lure-soft: #3A1E16; --good: #3CCB8A; --bad: #FF6B6E; --violet: #9C90FF; }
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.4 Figtree, system-ui, sans-serif; }
+body { padding: calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + 96px); max-width: 720px; margin: 0 auto; }
+h1 { font: 800 30px/1.1 'Bricolage Grotesque', system-ui, sans-serif; margin: 0; letter-spacing: -0.5px; }
+h2 { font: 800 13px/1 Figtree, system-ui, sans-serif; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin: 22px 4px 8px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.sub { color: var(--muted); font-size: 13px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 14px; }
+.stack > * + * { margin-top: 10px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 560px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+.tile { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 12px 14px; min-width: 0; }
+.tile b { display: block; font: 800 28px/1.1 'Bricolage Grotesque', system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+.tile span { color: var(--muted); font-size: 12px; font-weight: 700; }
+.tile.hot { border-color: var(--lure); background: var(--lure-soft); }
+.row { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.row + .row { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; }
+.grow { flex: 1; min-width: 0; }
+.ell { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pill { display: inline-block; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 10px; background: var(--alt); color: var(--muted); white-space: nowrap; }
+.pill.lure { background: var(--lure); color: #fff; } .pill.good { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+.pill.bad { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
+button { font: 800 14px Figtree, system-ui, sans-serif; border: 0; border-radius: 22px; padding: 10px 16px; background: var(--text); color: var(--bg); cursor: pointer; min-height: 40px; }
+button.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+button.lure { background: var(--lure); color: #fff; } button.bad { background: transparent; color: var(--bad); border: 1px solid var(--bad); }
+button.small { padding: 6px 12px; min-height: 32px; font-size: 13px; }
+button:disabled { opacity: .5; }
+input { font: 600 16px Figtree, system-ui, sans-serif; width: 100%; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--panel); color: var(--text); }
+.bars { display: flex; align-items: flex-end; gap: 4px; height: 70px; margin-top: 10px; }
+.bars div { flex: 1; background: var(--lure); border-radius: 4px 4px 0 0; min-height: 2px; opacity: .85; }
+.bars div.zero { background: var(--line); }
+.vote { margin-top: 8px; }
+.vote .bar { height: 8px; border-radius: 4px; background: var(--alt); overflow: hidden; margin-top: 4px; }
+.vote .bar i { display: block; height: 100%; background: var(--violet); border-radius: 4px; }
+.vote.won .bar i { background: var(--lure); }
+.empty { color: var(--muted); text-align: center; padding: 18px 8px; }
+nav { position: fixed; left: 0; right: 0; bottom: 0; background: var(--panel); border-top: 1px solid var(--line);
+  display: flex; justify-content: center; padding: 6px 6px calc(env(safe-area-inset-bottom) + 6px); z-index: 5; }
+nav .in { display: flex; width: 100%; max-width: 720px; }
+nav button { flex: 1; background: transparent; color: var(--faint); border-radius: 12px; padding: 6px 2px; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 50px; position: relative; }
+nav button .ico { font-size: 20px; line-height: 1; }
+nav button.on { color: var(--text); }
+nav .dot { position: absolute; top: 4px; right: calc(50% - 18px); background: var(--bad); color: #fff; font-size: 10px; border-radius: 8px; padding: 0 5px; }
+img.thumb { width: 56px; height: 72px; object-fit: cover; border-radius: 10px; background: var(--alt); flex-shrink: 0; }
+.toast { position: fixed; left: 16px; right: 16px; bottom: calc(env(safe-area-inset-bottom) + 76px); background: var(--text); color: var(--bg); padding: 12px 16px; border-radius: 14px; font-weight: 700; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 9; text-align: center; }
+.toast.show { opacity: 1; }
+.switch { position: relative; width: 50px; height: 30px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch span { position: absolute; inset: 0; background: var(--line); border-radius: 15px; transition: .2s; }
+.switch span::before { content: ''; position: absolute; width: 24px; height: 24px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+.switch input:checked + span { background: var(--lure); } .switch input:checked + span::before { transform: translateX(20px); }
+.login { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.logo { font: 400 46px 'Bricolage Grotesque'; font-style: italic; font-weight: 800; color: var(--lure); }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav id="nav" hidden><div class="in"></div></nav>
+<div class="toast" id="toast"></div>
+
+<script>
+// Lure HQ on your phone. Talks to Lure through the key-protected HQ functions.
+// The key is never in this page: you type it once and it stays on this phone only.
+const URL_ = 'https://fuhahxmkimqqvllxdtuy.supabase.co/rest/v1/rpc/';
+const PUB = 'sb_publishable_puFD3v_jJRUNGrXnPvHjoA_lkSAf3t8';
+const KEY_STORE = 'lure.hq.key';
+// Test accounts that don't count as real users (owner tests, Apple reviewers, demo).
+const NOT_REAL = (n) => /^(jordy|lisa|lure team)\b/i.test((n || '').trim());
+
+let key = null;
+try { key = localStorage.getItem(KEY_STORE); } catch (e) {}
+let tab = 'overview';
+try { tab = sessionStorage.getItem('lure.hq.tab') || 'overview'; } catch (e) {}
+let badges = {};
+
+const $ = (s) => document.querySelector(s);
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const safeUrl = (u) => (/^https:\/\/fuhahxmkimqqvllxdtuy\.supabase\.co\//.test(u || '') ? u : '');
+const fmtDate = (t) => t ? new Date(t).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+const fmtDay = (t) => t ? new Date(t).toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short' }) : '';
+const fmtTime = (t) => t ? new Date(t).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }) : '';
+
+function toast(msg) {
+  const el = $('#toast'); el.textContent = msg; el.classList.add('show');
+  clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+async function rpc(fn, body) {
+  const r = await fetch(URL_ + fn, { method: 'POST', headers: { apikey: PUB, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const data = await r.json().catch(() => null);
+  if (!r.ok) {
+    const msg = (data && (data.message || data.hint)) || 'fout';
+    if (/bad key|not allowed/i.test(msg)) { logout(true); throw new Error('key'); }
+    throw new Error(msg);
+  }
+  return data;
+}
+const hq = (action, args = {}) => rpc('hq', { p_key: key, p_action: action, p_args: args });
+const hqDrops = (action, args = {}) => rpc('hq_drops', { p_key: key, p_action: action, p_args: args });
+
+function logout(bad) {
+  key = null;
+  try { localStorage.removeItem(KEY_STORE); } catch (e) {}
+  renderLogin(bad ? 'Die sleutel klopt niet (meer). Probeer opnieuw.' : '');
+}
+
+function renderLogin(err) {
+  $('#nav').hidden = true;
+  $('#app').innerHTML = `
+    <div class="login">
+      <div class="logo">lure</div>
+      <h1>HQ</h1>
+      <div class="sub">Vul je HQ-sleutel in. Hij blijft alleen op deze telefoon bewaard.</div>
+      <input id="k" type="password" autocomplete="current-password" placeholder="HQ-sleutel">
+      ${err ? `<div style="color:var(--bad);font-weight:700">${esc(err)}</div>` : ''}
+      <button class="lure" id="go">Open HQ</button>
+      <div class="sub">Tip: tik daarna in Safari op Deel → "Zet op beginscherm", dan staat Lure HQ als app op je telefoon.</div>
+    </div>`;
+  const go = async () => {
+    const v = $('#k').value.trim();
+    if (!v) return;
+    $('#go').disabled = true;
+    key = v;
+    try {
+      await hq('overview');
+      try { localStorage.setItem(KEY_STORE, v); } catch (e) {}
+      start();
+    } catch (e) {
+      if (e.message !== 'key') renderLogin('Geen verbinding. Probeer het zo nog eens.');
+    }
+  };
+  $('#go').onclick = go;
+  $('#k').onkeydown = (e) => e.key === 'Enter' && go();
+}
+
+const TABS = [
+  ['overview', '📊', 'Overzicht'],
+  ['drops', '🎯', 'Drops'],
+  ['people', '👥', 'Mensen'],
+  ['inbox', '🚩', 'Meldingen'],
+  ['feedback', '💬', 'Feedback'],
+];
+
+function renderNav() {
+  const nav = $('#nav'); nav.hidden = false;
+  nav.querySelector('.in').innerHTML = TABS.map(([k, i, l]) =>
+    `<button data-tab="${k}" class="${tab === k ? 'on' : ''}"><span class="ico">${i}</span>${l}${badges[k] ? `<span class="dot">${badges[k]}</span>` : ''}</button>`).join('');
+  nav.querySelectorAll('button').forEach((b) => (b.onclick = () => { tab = b.dataset.tab; try { sessionStorage.setItem('lure.hq.tab', tab); } catch (e) {} show(); window.scrollTo(0, 0); }));
+}
+
+function header(title, sub) {
+  return `<div class="top"><div><h1>${esc(title)}</h1>${sub ? `<div class="sub">${sub}</div>` : ''}</div>
+    <button class="ghost small" id="refresh">↻</button></div>`;
+}
+function wireRefresh() { const b = $('#refresh'); if (b) b.onclick = () => show(); }
+
+async function show() {
+  renderNav();
+  $('#app').innerHTML = `<div class="empty">Laden…</div>`;
+  try {
+    if (tab === 'overview') await showOverview();
+    else if (tab === 'drops') await showDrops();
+    else if (tab === 'people') await showPeople();
+    else if (tab === 'inbox') await showInbox();
+    else await showFeedback();
+  } catch (e) {
+    if (e.message !== 'key') $('#app').innerHTML = header('Oeps') + `<div class="card empty">Kon niet laden: ${esc(e.message)}</div>`;
+  }
+  wireRefresh();
+}
+
+// ---------- Overzicht
+async function showOverview() {
+  const [o, recent] = await Promise.all([hq('overview'), hq('recent_users')]);
+  const real = (recent || []).filter((u) => !NOT_REAL(u.name));
+  badges = { inbox: (o.open_reports || 0) + (o.pending_claims || 0) || 0, feedback: o.new_feedback || 0 };
+  renderNav();
+  const t = (n, l, hot) => `<div class="tile ${hot ? 'hot' : ''}"><b>${esc(n ?? 0)}</b><span>${esc(l)}</span></div>`;
+  const max = Math.max(1, ...(o.signups_14d || []).map((d) => d.n));
+  const newest = real.slice(0, 5);
+  $('#app').innerHTML = header('Lure HQ', `Bijgewerkt ${fmtTime(Date.now())}`) + `
+    <h2>Gebruikers</h2>
+    <div class="grid">
+      ${t(real.length >= 40 ? '40+' : real.length, 'echte gebruikers', true)}
+      ${t(o.users, 'accounts totaal')}
+      ${t(o.users_today, 'nieuw vandaag', o.users_today > 0)}
+      ${t(o.users_week, 'nieuw deze week')}
+      ${t(o.with_login, 'met e-mail-login')}
+      ${t(o.friendships, 'vriendschappen')}
+    </div>
+    <div class="card" style="margin-top:10px">
+      <div class="row"><div class="grow"><b>Aanmeldingen</b><div class="sub">laatste 14 dagen</div></div></div>
+      <div class="bars">${(o.signups_14d || []).map((d) => `<div class="${d.n ? '' : 'zero'}" title="${esc(d.day)}: ${esc(d.n)}" style="height:${Math.round((d.n / max) * 100)}%"></div>`).join('')}</div>
+    </div>
+    <h2>Activiteit</h2>
+    <div class="grid">
+      ${t(o.active_week, 'actief deze week')}
+      ${t(o.checkins_today, 'check-ins vandaag')}
+      ${t(o.stories_today, 'stories vandaag')}
+      ${t(o.posts_today, 'posts vandaag')}
+      ${t(o.chats_today, 'chats vandaag')}
+      ${t(o.sharing_live, 'delen nu live')}
+    </div>
+    <h2>Zaken</h2>
+    <div class="grid">
+      ${t(o.partners, 'partners')}
+      ${t(o.paying, 'betalend')}
+      ${t(o.live_deals, 'live deals')}
+    </div>
+    ${(o.open_reports || o.pending_claims || o.new_feedback) ? `
+    <h2>Te doen</h2>
+    <div class="card">
+      ${o.open_reports ? `<div class="row"><div class="grow">🚩 ${esc(o.open_reports)} open meldingen</div><button class="small ghost" data-go="inbox">Bekijk</button></div>` : ''}
+      ${o.pending_claims ? `<div class="row"><div class="grow">🏠 ${esc(o.pending_claims)} zaken willen hun plek claimen</div><button class="small ghost" data-go="inbox">Bekijk</button></div>` : ''}
+      ${o.new_feedback ? `<div class="row"><div class="grow">💬 ${esc(o.new_feedback)} nieuwe berichten</div><button class="small ghost" data-go="feedback">Bekijk</button></div>` : ''}
+    </div>` : ''}
+    <h2>Nieuwste echte gebruikers</h2>
+    <div class="card">${newest.length ? newest.map((u) => `<div class="row"><div class="grow ell"><b>${esc(u.name)}</b> <span class="sub">@${esc(u.handle)}</span></div><span class="sub">${esc(fmtDate(u.created_at))}</span></div>`).join('') : '<div class="empty">Nog niemand</div>'}</div>
+    <div class="sub" style="margin-top:10px">"Echte gebruikers" telt jouw testaccounts (Jordy), Apple-reviewers (Lisa) en Lure Team niet mee.</div>`;
+  document.querySelectorAll('[data-go]').forEach((b) => (b.onclick = () => { tab = b.dataset.go; show(); }));
+}
+
+// ---------- Drops
+const KIND = { park: '🌳', square: '🏛️', beach: '🏖️', viewpoint: '🌇' };
+async function showDrops() {
+  const d = await hqDrops('list');
+  const drops = d.drops || [];
+  const cityRows = (d.cities || []).map((c) => `
+    <div class="row">
+      <div class="grow"><b>${esc(c.name)}</b><div class="sub">${esc(c.spots)} openbare plekken</div></div>
+      <label class="switch"><input type="checkbox" data-city="${esc(c.name)}" ${c.on ? 'checked' : ''}><span></span></label>
+    </div>`).join('');
+  const dropCard = (x) => {
+    const total = Math.max(1, x.voters);
+    const status = x.cancelled ? '<span class="pill bad">Geannuleerd</span>' : x.over ? '<span class="pill">Afgelopen</span>' : x.voting ? '<span class="pill lure">Stemmen loopt</span>' : new Date(x.reveal_at) > new Date() ? '<span class="pill good">Wacht op onthulling</span>' : '<span class="pill lure">LIVE</span>';
+    const cands = (x.candidates || []).map((c) => `
+      <div class="vote ${c.won ? 'won' : ''}">
+        <div class="row" style="border:0;padding:0;margin:0"><div class="grow ell">${KIND[c.kind] || '📍'} ${esc(c.name)} ${c.won ? '<span class="pill lure">Winnaar</span>' : ''}</div><b>${esc(c.votes)}</b></div>
+        <div class="bar"><i style="width:${Math.round((c.votes / total) * 100)}%"></i></div>
+      </div>`).join('');
+    return `<div class="card stack">
+      <div class="row"><div class="grow"><b>${esc(x.title)}</b> · ${esc(x.city)}<div class="sub">${esc(fmtDay(x.reveal_at))} · landt ${esc(fmtTime(x.reveal_at))}${x.vote_closes_at ? ` · stemmen tot ${esc(fmtTime(x.vote_closes_at))}` : ''}</div></div>${status}</div>
+      ${x.auto ? `<div><div class="sub" style="font-weight:800">🗳️ ${esc(x.voters)} ${x.voters === 1 ? 'stem' : 'stemmen'} · alleen jij ziet dit</div>${cands}</div>` : `<div class="sub">Speciale drop: ${esc(x.place_name || '')}</div>`}
+      <div class="grid">
+        <div class="tile"><b>${esc(x.going)}</b><span>onderweg</span></div>
+        <div class="tile"><b>${esc(x.arrived)}</b><span>aangekomen</span></div>
+        <div class="tile"><b>${esc(x.max_winners)}</b><span>winnaars max</span></div>
+      </div>
+      ${(x.winners || []).length ? `<div class="sub"><b>Aangekomen:</b> ${(x.winners || []).map((w) => `#${esc(w.rank)} ${esc(w.name)}`).join(', ')}</div>` : ''}
+      ${!x.over && !x.cancelled ? `<button class="bad small" data-cancel="${esc(x.id)}">Annuleer deze drop</button>` : ''}
+    </div>`;
+  };
+  $('#app').innerHTML = header('Lure Drops', 'Elke vrijdag automatisch: 12:00 stemmen, 19:30 hints, 20:00 onthulling') + `
+    <h2>Steden</h2>
+    <div class="card">${cityRows || '<div class="empty">Nog geen steden met plekken</div>'}
+      <div class="sub" style="margin-top:10px">Aan = elke vrijdag een drop in die stad. Zet pas aan als de app-versie met Drops in de App Store staat.</div>
+    </div>
+    <h2>Extra drop</h2>
+    <div class="card stack">
+      <div class="sub">Bijvoorbeeld voor een lanceeravond. Iedereen krijgt meteen een melding om te stemmen. De drop landt over:</div>
+      <div class="row" style="border:0;padding:0;margin-top:8px;gap:8px;flex-wrap:wrap">
+        ${[60, 90, 120, 180].map((m) => `<button class="ghost small" data-now="${m}">${m < 120 ? m + ' min' : m / 60 + ' uur'}</button>`).join('')}
+      </div>
+    </div>
+    <h2>Drops</h2>
+    <div class="stack">${drops.length ? drops.map(dropCard).join('') : '<div class="card empty">Nog geen drops. De eerste komt vrijdag om 12:00 (als de stad aan staat).</div>'}</div>`;
+  document.querySelectorAll('[data-city]').forEach((el) => (el.onchange = async () => {
+    try { await hqDrops('toggle_city', { city: el.dataset.city, on: el.checked }); toast(el.checked ? `Drops in ${el.dataset.city} staan aan` : `Drops in ${el.dataset.city} staan uit`); }
+    catch (e) { el.checked = !el.checked; toast('Lukte niet'); }
+  }));
+  document.querySelectorAll('[data-cancel]').forEach((b) => (b.onclick = async () => {
+    if (!confirm('Deze drop annuleren? Hij verdwijnt voor iedereen.')) return;
+    await hqDrops('cancel', { id: b.dataset.cancel }).catch(() => toast('Lukte niet'));
+    show();
+  }));
+  document.querySelectorAll('[data-now]').forEach((b) => (b.onclick = async () => {
+    const m = +b.dataset.now;
+    if (!confirm(`Nu een extra Lure Drop in Amsterdam starten? Iedereen krijgt meteen een melding. Hij landt over ${m} minuten.`)) return;
+    b.disabled = true;
+    try { const r = await hqDrops('start_now', { city: 'Amsterdam', minutes: m }); toast(r.ok ? 'Drop gestart 🎯' : 'Lukte niet'); }
+    catch (e) { toast('Lukte niet'); }
+    show();
+  }));
+}
+
+// ---------- Mensen
+async function showPeople(q) {
+  const list = q ? await hq('search_users', { q }) : await hq('recent_users');
+  const realCount = (list || []).filter((u) => !NOT_REAL(u.name)).length;
+  $('#app').innerHTML = header('Mensen', q ? `${(list || []).length} gevonden` : `Nieuwste ${(list || []).length} accounts · ${realCount} echt`) + `
+    <div style="margin:12px 0"><input id="q" type="search" placeholder="Zoek op naam, @handle of e-mail" value="${esc(q || '')}"></div>
+    <div class="card">${(list || []).length ? list.map((u) => `
+      <div class="row">
+        <div class="grow">
+          <div class="ell"><b>${esc(u.name)}</b> <span class="sub">@${esc(u.handle)}</span></div>
+          <div class="sub ell">${esc(fmtDate(u.created_at))}${u.email ? ' · ' + esc(u.email) : ''}</div>
+          <div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap">
+            ${NOT_REAL(u.name) ? '<span class="pill">test</span>' : ''}
+            ${u.has_login ? '<span class="pill good">login</span>' : '<span class="pill">alleen naam</span>'}
+            ${u.business ? '<span class="pill">zaak</span>' : ''}
+            ${u.banned_at ? '<span class="pill bad">geblokkeerd</span>' : ''}
+            <span class="pill">${esc(u.points)} pnt</span>
+          </div>
+        </div>
+        <button class="small ${u.banned_at ? 'ghost' : 'bad'}" data-ban="${esc(u.id)}" data-on="${u.banned_at ? '0' : '1'}" data-name="${esc(u.name)}">${u.banned_at ? 'Deblokkeer' : 'Blokkeer'}</button>
+      </div>`).join('') : '<div class="empty">Niemand gevonden</div>'}</div>`;
+  const input = $('#q');
+  let t;
+  input.oninput = () => { clearTimeout(t); t = setTimeout(() => showPeople(input.value.trim()).then(() => { const i = $('#q'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }), 450); };
+  document.querySelectorAll('[data-ban]').forEach((b) => (b.onclick = async () => {
+    const on = b.dataset.on === '1';
+    if (!confirm(on ? `${b.dataset.name} blokkeren? Posts en stories worden verborgen en chats gesloten.` : `${b.dataset.name} deblokkeren?`)) return;
+    await hq('ban_user', { user_id: b.dataset.ban, ban: on }).catch(() => toast('Lukte niet'));
+    toast(on ? 'Geblokkeerd' : 'Gedeblokkeerd');
+    showPeople(q);
+  }));
+}
+
+// ---------- Meldingen (gebruikers, posts, claims van zaken)
+async function showInbox() {
+  const [reports, posts, claims] = await Promise.all([hq('reports'), hq('post_reports'), hq('claims')]);
+  const none = !reports.length && !posts.length && !claims.length;
+  $('#app').innerHTML = header('Meldingen', none ? 'Alles is rustig 👌' : '') + `
+    ${claims.length ? `<h2>Zaken die hun plek claimen</h2><div class="stack">${claims.map((c) => `
+      <div class="card stack">
+        <div><b>${esc(c.venue)}</b> <span class="sub">${esc(c.city)}</span></div>
+        <div class="sub">${esc(c.user)} · ${esc(c.contact)} · ${esc(fmtDate(c.at))}</div>
+        ${c.current ? `<div class="sub">Nu eigenaar: ${esc(c.current)}</div>` : ''}
+        <div class="row" style="border:0;padding:0;margin:0;gap:8px"><button class="small lure" data-claim="1" data-v="${esc(c.venue_id)}" data-u="${esc(c.user_id)}">Goedkeuren</button><button class="small ghost" data-claim="0" data-v="${esc(c.venue_id)}" data-u="${esc(c.user_id)}">Afwijzen</button></div>
+      </div>`).join('')}</div>` : ''}
+    ${reports.length ? `<h2>Gemelde gebruikers en plekken</h2><div class="stack">${reports.map((r) => `
+      <div class="card stack">
+        <div class="row" style="border:0;padding:0;margin:0"><div class="grow"><b>${esc(r.target_name || r.target)}</b> <span class="pill">${esc(r.type)}</span> ${r.times_reported > 1 ? `<span class="pill bad">${esc(r.times_reported)}× gemeld</span>` : ''}</div></div>
+        <div>"${esc(r.reason)}"</div>
+        <div class="sub">door ${esc(r.reporter)} · ${esc(fmtDate(r.at))}</div>
+        ${(r.messages || []).length ? `<div class="sub"><b>Laatste berichten aan de melder:</b><br>${r.messages.map((m) => '• ' + esc(m.body)).join('<br>')}</div>` : ''}
+        <div class="row" style="border:0;padding:0;margin:0;gap:8px">
+          ${r.type === 'user' && !r.target_banned ? `<button class="small bad" data-banr="${esc(r.target)}" data-id="${esc(r.id)}">Blokkeer</button>` : ''}
+          <button class="small ghost" data-resolve="${esc(r.id)}">Afhandelen</button>
+        </div>
+      </div>`).join('')}</div>` : ''}
+    ${posts.length ? `<h2>Gemelde foto's en video's</h2><div class="stack">${posts.map((p) => `
+      <div class="card"><div class="row" style="border:0;padding:0;margin:0;align-items:flex-start">
+        ${safeUrl(p.thumb || p.media) ? `<img class="thumb" src="${esc(safeUrl(p.thumb || p.media))}" alt="">` : ''}
+        <div class="grow stack">
+          <div><b>${esc(p.user)}</b> ${p.hidden ? '<span class="pill">verborgen</span>' : ''}</div>
+          ${p.caption ? `<div class="sub">"${esc(p.caption)}"</div>` : ''}
+          <div>Reden: ${esc(p.reason)}</div>
+          <div class="row" style="border:0;padding:0;margin:0;gap:8px">
+            ${!p.hidden ? `<button class="small bad" data-hidepost="${esc(p.post_id)}">Verberg</button>` : ''}
+            <button class="small ghost" data-resolvepost="${esc(p.id)}">Is oké</button>
+          </div>
+        </div>
+      </div></div>`).join('')}</div>` : ''}
+    ${none ? '<div class="card empty">Geen open meldingen.</div>' : ''}`;
+  const act = (sel, fn) => document.querySelectorAll(sel).forEach((b) => (b.onclick = async () => { b.disabled = true; try { await fn(b); toast('Gedaan'); } catch (e) { if (e.message !== 'no') toast('Lukte niet'); } showInbox(); }));
+  act('[data-claim]', (b) => hq('decide_claim', { venue_id: b.dataset.v, user_id: b.dataset.u, approve: b.dataset.claim === '1' }));
+  act('[data-resolve]', (b) => hq('resolve_report', { id: +b.dataset.resolve }));
+  act('[data-banr]', async (b) => { if (!confirm('Deze gebruiker blokkeren?')) throw new Error('no'); await hq('ban_user', { user_id: b.dataset.banr, ban: true }); await hq('resolve_report', { id: +b.dataset.id }); });
+  act('[data-hidepost]', (b) => hq('hide_post', { id: b.dataset.hidepost }));
+  act('[data-resolvepost]', (b) => hq('resolve_post_report', { id: +b.dataset.resolvepost }));
+}
+
+// ---------- Feedback
+async function showFeedback() {
+  const list = await hq('feedback');
+  const open = list.filter((f) => !f.done);
+  const done = list.filter((f) => f.done).slice(0, 15);
+  const item = (f) => `<div class="card stack">
+      <div>${esc(f.body)}</div>
+      <div class="row" style="border:0;padding:0;margin:0"><div class="grow sub">${esc(f.user || 'Onbekend')} · ${esc(fmtDate(f.at))}</div>${!f.done ? `<button class="small ghost" data-done="${esc(f.id)}">Gelezen ✓</button>` : ''}</div>
+    </div>`;
+  $('#app').innerHTML = header('Feedback', `${open.length} nieuw`) + `
+    <h2>Nieuw</h2><div class="stack">${open.length ? open.map(item).join('') : '<div class="card empty">Geen nieuwe berichten.</div>'}</div>
+    ${done.length ? `<h2>Gelezen</h2><div class="stack">${done.map(item).join('')}</div>` : ''}
+    <div style="margin-top:28px;text-align:center"><button class="ghost small" id="out">Uitloggen op deze telefoon</button></div>`;
+  document.querySelectorAll('[data-done]').forEach((b) => (b.onclick = async () => { await hq('feedback_done', { id: +b.dataset.done }).catch(() => {}); showFeedback(); }));
+  $('#out').onclick = () => confirm('Uitloggen? Je moet daarna je sleutel opnieuw invullen.') && logout(false);
+}
+
+function start() { show(); }
+if (key) start(); else renderLogin('');
+</script>
+</body>
+</html>
