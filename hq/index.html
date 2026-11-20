@@ -123,6 +123,7 @@ async function rpc(fn, body) {
 }
 const hq = (action, args = {}) => rpc('hq', { p_key: key, p_action: action, p_args: args });
 const hqDrops = (action, args = {}) => rpc('hq_drops', { p_key: key, p_action: action, p_args: args });
+const hqUsage = (action, args = {}) => rpc('hq_usage', { p_key: key, p_action: action, p_args: args });
 
 function logout(bad) {
   key = null;
@@ -162,6 +163,7 @@ function renderLogin(err) {
 const TABS = [
   ['overview', '📊', 'Overzicht'],
   ['drops', '🎯', 'Drops'],
+  ['usage', '📈', 'Gebruik'],
   ['people', '👥', 'Mensen'],
   ['inbox', '🚩', 'Meldingen'],
   ['feedback', '💬', 'Feedback'],
@@ -186,6 +188,7 @@ async function show() {
   try {
     if (tab === 'overview') await showOverview();
     else if (tab === 'drops') await showDrops();
+    else if (tab === 'usage') await showUsage();
     else if (tab === 'people') await showPeople();
     else if (tab === 'inbox') await showInbox();
     else await showFeedback();
@@ -340,6 +343,76 @@ async function showPeople(q) {
     toast(on ? 'Geblokkeerd' : 'Gedeblokkeerd');
     showPeople(q);
   }));
+}
+
+// ---------- Gebruik (wat mensen echt doen in de app)
+const EV_NL = {
+  check_in: 'Ingecheckt', claim_deal: 'Deal geclaimd', add_friend_qr: 'Vriend toegevoegd (QR)', friend_request_sent: 'Vriendverzoek gestuurd',
+  friend_request_answered: 'Vriendverzoek beantwoord', post_created: 'Post geplaatst', story_created: 'Story geplaatst', post_liked: 'Post geliket',
+  plan_created: 'Plan gemaakt', plan_joined: 'Meegaan met plan', plan_shared: 'Plan gedeeld', tonight_voted: 'Gestemd op vanavond',
+  drop_voted: 'Gestemd op drop', drop_guessed: 'Drop geraden', drop_going: 'Gaat naar drop', drop_arrived: 'Bij drop aangekomen', drop_created: 'Drop gemaakt', drop_shared: 'Drop gedeeld',
+  open_to_meet: 'Open voor ontmoeten', wave_sent: 'Zwaai gestuurd', chat_opened: 'Chat geopend', message_sent: 'Bericht gestuurd', voice_memo_sent: 'Spraakmemo gestuurd',
+  call_started: 'Gebeld', call_answered: 'Opgenomen', live_location_toggled: 'Live locatie aan/uit', bio_set: 'Bio ingevuld', feedback_sent: 'Feedback gestuurd',
+  invite_shared: 'Uitnodiging gedeeld', business_claimed: 'Zaak geclaimd', business_added: 'Zaak toegevoegd', business_deal_created: 'Deal gemaakt (zaak)',
+  report_sent: 'Melding gedaan', user_blocked: 'Iemand geblokkeerd', app_open: 'App geopend', app_close: 'App gesloten', screen: 'Scherm',
+};
+const SCREEN_NL = { '/': 'Kaart', '/friends': 'Vrienden', '/profile': 'Profiel', '/lures': 'Deals', '/scan': 'Scannen', '/compose': 'Post maken', '/people': 'Mensen hier',
+  '/tonight': 'Vanavond', '/memories': 'Herinneringen', '/welcome': 'Welkom', '/setup': 'Account maken', '/secure': 'Account opslaan', '/add': 'Vriend toevoegen' };
+const evName = (n) => EV_NL[n] || n;
+const scrName = (s) => SCREEN_NL[s] || s || '?';
+const dur = (s) => s == null ? '–' : s < 60 ? `${s} sec` : `${Math.round(s / 60)} min`;
+
+async function showUsage(days = 7) {
+  const u = await hqUsage('summary', { days });
+  const t = (n, l, hot) => `<div class="tile ${hot ? 'hot' : ''}"><b>${esc(n ?? 0)}</b><span>${esc(l)}</span></div>`;
+  const users = (u.users || []).filter((x) => !NOT_REAL(x.name));
+  const r = u.returning || {};
+  const maxA = Math.max(1, ...(u.actions || []).map((a) => a.n));
+  const maxS = Math.max(1, ...(u.screens || []).map((a) => a.n));
+  const barRow = (label, n, users, max) => `<div class="row"><div class="grow"><div class="ell"><b>${esc(label)}</b></div>
+      <div style="height:6px;border-radius:3px;background:var(--lure);opacity:.85;margin-top:5px;width:${Math.max(3, Math.round((n / max) * 100))}%"></div></div>
+      <div class="sub" style="text-align:right;white-space:nowrap">${esc(n)}×<br>${esc(users)} pers.</div></div>`;
+  $('#app').innerHTML = header('Gebruik', u.tracking_since ? `Gemeten sinds ${esc(fmtDay(u.tracking_since))} · laatste ${days} dagen` : 'Nog geen metingen: dit vult zich zodra mensen de nieuwe versie van Lure gebruiken') + `
+    <div style="display:flex;gap:6px;margin:12px 0">${[1, 7, 30].map((d) => `<button class="small ${d === days ? '' : 'ghost'}" data-days="${d}">${d === 1 ? 'Vandaag' : d + ' dagen'}</button>`).join('')}</div>
+    <div class="grid">
+      ${t(u.active_today, 'actief vandaag', u.active_today > 0)}
+      ${t(u.active_period, `actief (${days} d)`)}
+      ${t(u.sessions, 'keer geopend')}
+      ${t(dur(u.avg_session_s), 'gem. tijd per keer')}
+      ${t(r.came_back_next_day ?? 0, `kwamen dag 2 terug (van ${r.tracked_users ?? 0})`)}
+      ${t(r.came_back_within_7d ?? 0, 'kwamen binnen 7 dagen terug')}
+    </div>
+    <h2>Wat doen ze?</h2>
+    <div class="card">${(u.actions || []).length ? u.actions.map((a) => barRow(evName(a.name), a.n, a.users, maxA)).join('') : '<div class="empty">Nog niets gemeten</div>'}</div>
+    <h2>Welke schermen?</h2>
+    <div class="card">${(u.screens || []).length ? u.screens.map((a) => barRow(scrName(a.screen), a.n, a.users, maxS)).join('') : '<div class="empty">Nog niets gemeten</div>'}</div>
+    <h2>Waar haken ze af?</h2>
+    <div class="sub" style="margin-bottom:8px">Laatste scherm van mensen die 3+ dagen niet terugkwamen</div>
+    <div class="card">${(u.last_screen_of_dropouts || []).length ? u.last_screen_of_dropouts.map((a) => `<div class="row"><div class="grow"><b>${esc(scrName(a.screen))}</b></div><div class="sub">${esc(a.n)} pers.</div></div>`).join('') : '<div class="empty">Nog niemand afgehaakt</div>'}</div>
+    <h2>Per persoon</h2>
+    <div class="card">${users.length ? users.map((x) => `
+      <div class="row" data-user="${esc(x.id)}" data-name="${esc(x.name)}" style="cursor:pointer">
+        <div class="grow"><div class="ell"><b>${esc(x.name)}</b> <span class="sub">@${esc(x.handle)}</span></div>
+          <div class="sub">laatst ${esc(fmtDate(x.last_seen))} · ${esc(x.days_active)} dag(en) actief · ${esc(x.sessions)}× geopend</div></div>
+        <span class="sub">›</span>
+      </div>`).join('') : '<div class="empty">Nog niemand gemeten</div>'}</div>`;
+  document.querySelectorAll('[data-days]').forEach((b) => (b.onclick = () => showUsage(Number(b.dataset.days))));
+  document.querySelectorAll('[data-user]').forEach((b) => (b.onclick = () => showTimeline(b.dataset.user, b.dataset.name, days)));
+}
+
+async function showTimeline(id, name, days) {
+  const list = await hqUsage('timeline', { user_id: id });
+  let lastDay = '';
+  $('#app').innerHTML = header(name, `Laatste ${(list || []).length} acties`) + `
+    <div style="margin:12px 0"><button class="small ghost" id="back">‹ Terug naar Gebruik</button></div>
+    <div class="card">${(list || []).length ? list.map((e) => {
+      const day = fmtDay(e.created_at);
+      const head = day !== lastDay ? `<div class="sub" style="font-weight:800;margin-top:10px">${esc(day)}</div>` : '';
+      lastDay = day;
+      const what = e.name === 'screen' ? `opent ${scrName(e.screen)}` : e.name === 'app_close' ? `sluit app na ${dur(e.props && Number(e.props.seconds))}` : evName(e.name) + (e.props && e.props.failed ? ' (mislukt)' : '');
+      return head + `<div class="row"><div class="sub" style="width:44px">${esc(fmtTime(e.created_at))}</div><div class="grow ell">${esc(what)}</div></div>`;
+    }).join('') : '<div class="empty">Nog niets gemeten</div>'}</div>`;
+  $('#back').onclick = () => showUsage(days);
 }
 
 // ---------- Meldingen (gebruikers, posts, claims van zaken)
