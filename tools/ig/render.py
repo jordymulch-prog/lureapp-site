@@ -12,8 +12,10 @@ spec.json:
   "subtitle": "40 spots on the map",   # optional
   "items": ["Brasserie 1434", "..."],  # optional list (max 6)
   "cta": "Download Lure. Free on iPhone",  # optional bottom line
-  "photo": "https://..."               # optional background photo URL (e.g. from Higgsfield)
+  "photo": "https://...",              # optional background photo URL (e.g. from Higgsfield)
+  "size": 104                          # optional headline font size (smaller for long titles)
 }
+Carousel: {"out": "ig/2026-11-24", "slides": [{...image keys...}, {...}]} -> ig/2026-11-24-1.jpg, -2.jpg, ...
 Writes <out>.jpg (always; for video it is the cover) and <out>.mp4 for video.
 """
 import html
@@ -77,6 +79,13 @@ h1 em{{font-style:normal;color:#FF6A3D}}
 
 def main(path: str) -> None:
     s = json.load(open(path))
+    # Carousel: "slides": [{...}, {...}] -> <out>-1.jpg, <out>-2.jpg, ... (each slide uses the same keys as an image post)
+    if s.get("slides"):
+        for i, slide in enumerate(s["slides"], 1):
+            one = os.path.join(tempfile.gettempdir(), f"slide{i}.json")
+            json.dump({**slide, "kind": "image", "out": f"{s['out']}-{i}"}, open(one, "w"))
+            main(one)
+        return
     out = os.path.join(ROOT, s["out"])
     os.makedirs(os.path.dirname(out), exist_ok=True)
     video = s.get("kind") == "video"
