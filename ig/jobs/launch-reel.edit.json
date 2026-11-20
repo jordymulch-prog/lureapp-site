@@ -1,0 +1,12 @@
+{"out": "ig/launch-reel",
+ "music": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171042_6b954491-56a5-44ab-a73b-e89b1c25fdf4.mp3",
+ "cover_at": 1.2,
+ "segments": [
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171038_667f65e2-7402-4050-8c6f-0bddbca23975.mp4", "dur": 2.95, "skip": 0.3, "overlay": "ig/jobs/launch-reel/t1.png"},
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171039_526cceea-33a6-4be8-82c7-b7e20e3703db.mp4", "dur": 1.97, "skip": 0.5, "overlay": "ig/jobs/launch-reel/t2.png"},
+  {"src": "ig/jobs/launch-reel/map.mp4", "dur": 2.95},
+  {"src": "ig/jobs/launch-reel/scan.mp4", "dur": 1.97},
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171037_6b2aaa1b-9c15-4849-89af-a4b74f7ec153.mp4", "dur": 1.97, "skip": 1.0, "overlay": "ig/jobs/launch-reel/t3.png"},
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171038_6e040906-6802-4822-a209-84dd027fadec.mp4", "dur": 1.97, "skip": 1.0, "overlay": "ig/jobs/launch-reel/t4.png"},
+  {"src": "ig/jobs/launch-reel/end.mp4", "dur": 2.3}
+ ]}
