@@ -1,0 +1,40 @@
+name: Compose Instagram media
+on:
+  push:
+    paths: ["ig/jobs/*.json"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: compose
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq
+      - name: Compose pending jobs
+        run: |
+          set -e
+          for job in ig/jobs/*.json; do
+            out=$(jq -r .out "$job"); type=$(jq -r .type "$job"); url=$(jq -r .media_url "$job"); ov=$(jq -r .overlay "$job")
+            # only Higgsfield's own CDN
+            case "$url" in https://d8j0ntlcm91z4.cloudfront.net/*|https://*.higgsfield.ai/*) ;; *) echo "skip $job: url not allowed"; continue;; esac
+            if [ "$type" = video ]; then
+              [ -f "$out.mp4" ] && continue
+              curl -sSfL "$url" -o /tmp/in.mp4
+              ffmpeg -y -loglevel error -i /tmp/in.mp4 -loop 1 -i "$ov" -filter_complex \
+                "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,fps=30[bg];[1:v]format=rgba,fade=in:st=0.3:d=0.7:alpha=1[ov];[bg][ov]overlay=0:0:shortest=1,format=yuv420p[v]" \
+                -map "[v]" -map 0:a? -c:v libx264 -preset veryfast -crf 20 -c:a aac -b:a 128k -movflags +faststart "$out.mp4"
+              ffmpeg -y -loglevel error -sseof -0.5 -i "$out.mp4" -frames:v 1 -q:v 3 "$out.jpg"
+            else
+              [ -f "$out.jpg" ] && continue
+              curl -sSfL "$url" -o /tmp/in.img
+              ffmpeg -y -loglevel error -i /tmp/in.img -i "$ov" -filter_complex \
+                "[0:v]scale=1080:1350:force_original_aspect_ratio=increase,crop=1080:1350[bg];[bg][1:v]overlay=0:0" -frames:v 1 -q:v 3 "$out.jpg"
+            fi
+            echo "made $out"
+          done
+      - name: Commit
+        run: |
+          git config user.name "lure-bot"; git config user.email "actions@users.noreply.github.com"
+          git add ig/ && (git diff --cached --quiet || (git commit -m "Compose Instagram media" && git push))

@@ -15,6 +15,8 @@ spec.json:
   "photo": "https://...",              # optional background photo URL (e.g. from Higgsfield)
   "size": 104                          # optional headline font size (smaller for long titles)
 }
+AI media: add "media_url": "<Higgsfield result URL>" -> only the text layer is rendered here; push, and the GitHub
+Action .github/workflows/compose.yml downloads the media, adds the text and commits <out>.mp4/.jpg (+ cover .jpg for video).
 Carousel: {"out": "ig/2026-11-24", "slides": [{...image keys...}, {...}]} -> ig/2026-11-24-1.jpg, -2.jpg, ...
 Writes <out>.jpg (always; for video it is the cover) and <out>.mp4 for video.
 """
@@ -38,11 +40,14 @@ def page_html(s: dict, w: int, h: int, animate: bool) -> str:
         for i, x in enumerate((s.get("items") or [])[:6])
     )
     photo = s.get("photo")
-    bg = (
+    if s.get("transparent"):
+        bg = "background:transparent;"
+    else:
+      bg = (
         f"background:linear-gradient(180deg,rgba(12,11,18,.35) 0%,rgba(12,11,18,.55) 45%,rgba(12,11,18,.95) 100%),url('{html.escape(photo)}') center/cover;"
         if photo
         else "background:radial-gradient(1200px 900px at 85% 10%,rgba(255,106,61,.38),transparent 60%),radial-gradient(900px 700px at 0% 100%,rgba(61,214,196,.22),transparent 60%),#0C0B12;"
-    )
+      )
     anim = "" if animate else "h1,.sub,.it,.cta{animation:none!important;opacity:1!important;transform:none!important}"
     scale = w / 1080
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>
@@ -67,9 +72,10 @@ h1 em{{font-style:normal;color:#FF6A3D}}
 .it{{display:flex;align-items:center;gap:{int(18*scale)}px;font-size:{int(36*scale)}px;font-weight:700;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:{int(24*scale)}px;padding:{int(18*scale)}px {int(26*scale)}px;animation:up .6s both}}
 .pin{{width:{int(22*scale)}px;height:{int(22*scale)}px;border-radius:50%;background:#3DD6C4;box-shadow:0 0 0 {int(8*scale)}px rgba(61,214,196,.22);flex:none}}
 .cta{{margin-top:{int(54*scale)}px;font-size:{int(32*scale)}px;font-weight:700;color:#FF6A3D;animation:up .7s 1s both}}
+.shade{{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,18,.6) 0%,rgba(12,11,18,0) 20%,rgba(12,11,18,0) 42%,rgba(12,11,18,.9) 75%,#0C0B12 100%)}}
 @keyframes up{{from{{opacity:0;transform:translateY({int(40*scale)}px)}}to{{opacity:1;transform:none}}}}
 {anim}
-</style></head><body><div class="grid"></div><div class="wrap">
+</style></head><body>{'<div class="shade"></div>' if s.get("transparent") else '<div class="grid"></div>'}<div class="wrap">
 <div class="top"><img src="file://{ICON}"><div class="brand">Lure</div>{f'<div class="kick">{e(s.get("kicker"))}</div>' if s.get("kicker") else ''}</div>
 <div class="mid"><h1>{e(s.get('title')).replace('*', '')}</h1>
 {f'<div class="sub">{e(s.get("subtitle"))}</div>' if s.get('subtitle') else ''}
@@ -90,6 +96,26 @@ def main(path: str) -> None:
     os.makedirs(os.path.dirname(out), exist_ok=True)
     video = s.get("kind") == "video"
     w, h = (1080, 1920) if video else (1080, 1350)
+    if s.get("media_url"):
+        # AI photo/video from Higgsfield: render only the text layer (transparent PNG) and queue a GitHub
+        # Actions job that downloads the media and puts the text on top (.github/workflows/compose.yml).
+        s["transparent"] = True
+        name = os.path.basename(out)
+        jobs = os.path.join(ROOT, "ig", "jobs")
+        os.makedirs(jobs, exist_ok=True)
+        with sync_playwright() as p:
+            b = p.chromium.launch(channel="chrome") if os.path.exists("/usr/bin/google-chrome") else p.chromium.launch()
+            pg = b.new_page(viewport={"width": w, "height": h})
+            tmp_html = os.path.join(tempfile.gettempdir(), "overlay.html")
+            open(tmp_html, "w").write(page_html(s, w, h, animate=False))
+            pg.goto("file://" + tmp_html)
+            pg.wait_for_timeout(600)
+            pg.screenshot(path=os.path.join(jobs, name + "-overlay.png"), omit_background=True)
+            b.close()
+        json.dump({"media_url": s["media_url"], "type": "video" if video else "image", "overlay": f"ig/jobs/{name}-overlay.png", "out": s["out"]},
+                  open(os.path.join(jobs, name + ".json"), "w"), indent=1)
+        print("queued", os.path.join(jobs, name + ".json"), "-> push, then wait for", s["out"] + (".mp4" if video else ".jpg"))
+        return
     with tempfile.TemporaryDirectory() as tmp, sync_playwright() as p:
         b = p.chromium.launch(channel="chrome") if os.path.exists("/usr/bin/google-chrome") else p.chromium.launch()
         still = os.path.join(tmp, "still.html")
