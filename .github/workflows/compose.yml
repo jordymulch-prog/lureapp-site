@@ -5,13 +5,22 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-concurrency: compose
+concurrency:
+  group: compose
+  cancel-in-progress: true
 jobs:
   compose:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg jq
+      - name: Install ffmpeg (static build)
+        run: |
+          curl -sSfL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz -o /tmp/ff.tar.xz \
+            || curl -sSfL https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz -o /tmp/ff.tar.xz
+          mkdir -p /tmp/ff && tar -xf /tmp/ff.tar.xz -C /tmp/ff --strip-components=1
+          f=$(find /tmp/ff -name ffmpeg -type f | head -1); sudo cp "$f" "$(dirname "$f")/ffprobe" /usr/local/bin/ 2>/dev/null || sudo cp "$f" /usr/local/bin/
+          ffmpeg -version | head -1; jq --version
       - name: Compose pending jobs
         run: |
           set -e
