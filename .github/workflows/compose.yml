@@ -26,7 +26,7 @@ jobs:
           set -e
           shopt -s nullglob
           for job in ig/jobs/*.json; do
-            case "$job" in *.edit.json) continue;; esac
+            case "$job" in *.edit.json|*.fetch.json) continue;; esac
             out=$(jq -r .out "$job"); type=$(jq -r .type "$job"); url=$(jq -r .media_url "$job"); ov=$(jq -r .overlay "$job")
             # only Higgsfield's own CDN
             case "$url" in https://d8j0ntlcm91z4.cloudfront.net/*|https://*.higgsfield.ai/*) ;; *) echo "skip $job: url not allowed"; continue;; esac
@@ -44,6 +44,17 @@ jobs:
                 "[0:v]scale=1080:1350:force_original_aspect_ratio=increase,crop=1080:1350[bg];[bg][1:v]overlay=0:0" -frames:v 1 -q:v 3 "$out.jpg"
             fi
             echo "made $out"
+          done
+      - name: Fetch media for review
+        run: |
+          shopt -s nullglob
+          for job in ig/jobs/*.fetch.json; do
+            jq -c '.files[]' "$job" | while read -r f; do
+              url=$(echo "$f" | jq -r .url); dst=$(echo "$f" | jq -r .to)
+              case "$url" in https://d8j0ntlcm91z4.cloudfront.net/*) ;; *) echo "skip $url"; continue;; esac
+              [ -f "$dst" ] && continue
+              mkdir -p "$(dirname "$dst")"; curl -sSfL "$url" -o "$dst"
+            done
           done
       - name: Edit pending Reels
         run: |
