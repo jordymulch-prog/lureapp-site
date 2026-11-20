@@ -17,6 +17,7 @@ jobs:
           set -e
           shopt -s nullglob
           for job in ig/jobs/*.json; do
+            case "$job" in *.edit.json) continue;; esac
             out=$(jq -r .out "$job"); type=$(jq -r .type "$job"); url=$(jq -r .media_url "$job"); ov=$(jq -r .overlay "$job")
             # only Higgsfield's own CDN
             case "$url" in https://d8j0ntlcm91z4.cloudfront.net/*|https://*.higgsfield.ai/*) ;; *) echo "skip $job: url not allowed"; continue;; esac
@@ -34,6 +35,14 @@ jobs:
                 "[0:v]scale=1080:1350:force_original_aspect_ratio=increase,crop=1080:1350[bg];[bg][1:v]overlay=0:0" -frames:v 1 -q:v 3 "$out.jpg"
             fi
             echo "made $out"
+          done
+      - name: Edit pending Reels
+        run: |
+          shopt -s nullglob
+          for job in ig/jobs/*.edit.json; do
+            out=$(jq -r .out "$job")
+            [ -f "$out.mp4" ] && continue
+            python3 tools/ig/edit.py "$job"
           done
       - name: Commit
         run: |
