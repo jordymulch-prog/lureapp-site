@@ -85,6 +85,10 @@ h1 em{{font-style:normal;color:#FF6A3D}}
 
 def main(path: str) -> None:
     s = json.load(open(path))
+    # A Higgsfield photo/video URL can't be loaded in this workspace: treat it as AI media for the GitHub Action.
+    for k in ("photo", "video_url"):
+        if s.get(k) and not s.get("media_url"):
+            s["media_url"] = s.pop(k)
     # Carousel: "slides": [{...}, {...}] -> <out>-1.jpg, <out>-2.jpg, ... (each slide uses the same keys as an image post)
     if s.get("slides"):
         for i, slide in enumerate(s["slides"], 1):
