@@ -124,6 +124,7 @@ async function rpc(fn, body) {
 const hq = (action, args = {}) => rpc('hq', { p_key: key, p_action: action, p_args: args });
 const hqDrops = (action, args = {}) => rpc('hq_drops', { p_key: key, p_action: action, p_args: args });
 const hqUsage = (action, args = {}) => rpc('hq_usage', { p_key: key, p_action: action, p_args: args });
+const hqGrowth = (action, args = {}) => rpc('hq_growth', { p_key: key, p_action: action, p_args: args });
 
 function logout(bad) {
   key = null;
@@ -163,6 +164,7 @@ function renderLogin(err) {
 const TABS = [
   ['overview', '📊', 'Overzicht'],
   ['drops', '🎯', 'Drops'],
+  ['growth', '🚀', 'Groei'],
   ['usage', '📈', 'Gebruik'],
   ['people', '👥', 'Mensen'],
   ['inbox', '🚩', 'Meldingen'],
@@ -188,6 +190,7 @@ async function show() {
   try {
     if (tab === 'overview') await showOverview();
     else if (tab === 'drops') await showDrops();
+    else if (tab === 'growth') await showGrowth();
     else if (tab === 'usage') await showUsage();
     else if (tab === 'people') await showPeople();
     else if (tab === 'inbox') await showInbox();
@@ -343,6 +346,82 @@ async function showPeople(q) {
     toast(on ? 'Geblokkeerd' : 'Gedeblokkeerd');
     showPeople(q);
   }));
+}
+
+// ---------- Groei: trechter, Apple-cijfers, uitnodigingen, behoud, crashes, omzet, bericht sturen
+const SRC_NL = { 'App Store search': 'Zoeken in App Store', 'App Store browse': 'Bladeren in App Store', 'Web referrer': 'Link op een website', 'App referrer': 'Link in een andere app', 'Institutional purchase': 'Zakelijke aankoop', 'Unavailable': 'Onbekend' };
+async function showGrowth() {
+  const [g, ap] = await Promise.all([hqGrowth('growth'), hqGrowth('apple', { days: 30 }).catch(() => null)]);
+  const t = (n, l, hot) => `<div class="tile ${hot ? 'hot' : ''}"><b>${esc(n ?? 0)}</b><span>${esc(l)}</span></div>`;
+  const f = g.funnel || {};
+  const steps = [['Account gemaakt', f.accounts], ['Profiel klaar (18+)', f.set_up], ['Eerste vriend', f.first_friend], ['Iets gedaan (check-in, plan, story of post)', f.first_action], ['Gechat', f.chatted]];
+  const top = Math.max(1, f.accounts || 0);
+  const funnel = steps.map(([l, n], i) => `<div class="row"><div class="grow"><div class="ell"><b>${i + 1}. ${esc(l)}</b></div>
+      <div style="height:8px;border-radius:4px;background:var(--lure);opacity:.85;margin-top:5px;width:${Math.max(2, Math.round(((n || 0) / top) * 100))}%"></div></div>
+      <div class="sub" style="text-align:right;white-space:nowrap"><b>${esc(n ?? 0)}</b><br>${Math.round(((n || 0) / top) * 100)}%</div></div>`).join('');
+  const daily = (ap && ap.daily) || [];
+  const sum = (k) => daily.reduce((a, d) => a + Number(d[k] || 0), 0);
+  const maxD = Math.max(1, ...daily.map((d) => Number(d.downloads || 0)));
+  const apple = !ap ? '<div class="card empty">Kon Apple-cijfers niet laden</div>' : !ap.rows ? `<div class="card empty">Apple maakt de eerste cijfers nog klaar (duurt 1–2 dagen na de koppeling op 20 nov).<br><br><button class="small ghost" id="asc-sync">Nu ophalen bij Apple</button></div>` : `
+    <div class="grid">
+      ${t(sum('first_downloads'), 'nieuwe downloads (30 d)', true)}
+      ${t(sum('downloads'), 'downloads totaal (30 d)')}
+      ${t(sum('deletions'), 'verwijderd (30 d)')}
+      ${t(sum('page_views'), 'keer je App Store-pagina bekeken')}
+      ${t(sum('impressions'), 'keer gezien in de App Store')}
+      ${t(sum('page_views') ? Math.round((sum('downloads') / sum('page_views')) * 100) + '%' : '–', 'bekeken → gedownload')}
+    </div>
+    <div class="card" style="margin-top:10px"><div class="row"><div class="grow"><b>Downloads per dag</b><div class="sub">t/m ${esc(fmtDay(ap.newest_day))}</div></div><button class="small ghost" id="asc-sync">↻ Apple</button></div>
+      <div class="bars">${daily.map((d) => `<div class="${Number(d.downloads) ? '' : 'zero'}" title="${esc(d.dt)}: ${esc(d.downloads)}" style="height:${Math.round((Number(d.downloads) / maxD) * 100)}%"></div>`).join('')}</div></div>
+    <div class="card" style="margin-top:10px"><b>Hoe vonden ze Lure?</b>${(ap.sources || []).map((x) => `<div class="row"><div class="grow">${esc(SRC_NL[x.source] || x.source)}</div><b>${esc(x.n)}</b></div>`).join('') || '<div class="empty">–</div>'}</div>
+    <div class="card" style="margin-top:10px"><b>Landen</b>${(ap.countries || []).map((x) => `<div class="row"><div class="grow">${esc(x.country)}</div><b>${esc(x.n)}</b></div>`).join('') || '<div class="empty">–</div>'}</div>`;
+  const inv = g.invites || {};
+  const cohorts = g.cohorts || [];
+  const pct = (a, b, known) => known ? (b ? Math.round((a / b) * 100) + '%' : '–') : 'nog te vroeg';
+  const cr = g.crashes || {};
+  const rev = g.revenue || {};
+  $('#app').innerHTML = header('Groei', `Bijgewerkt ${fmtTime(Date.now())}`) + `
+    <h2>Trechter</h2>
+    <div class="sub" style="margin-bottom:8px">Hoeveel mensen elke stap halen. Waar de balk het hardst krimpt, haken mensen af.</div>
+    <div class="card">${funnel}</div>
+    <h2>Apple App Store</h2>
+    ${apple}
+    <h2>Uitnodigingen</h2>
+    <div class="grid">
+      ${t(inv.invited_users, 'kwamen binnen via een uitnodiging', inv.invited_users > 0)}
+      ${t(inv.shared, 'uitnodigingen gedeeld (sinds 1.0.3)')}
+    </div>
+    ${(inv.top_inviters || []).length ? `<div class="card" style="margin-top:10px"><b>Beste uitnodigers</b>${inv.top_inviters.map((x) => `<div class="row"><div class="grow">${esc(x.name)} <span class="sub">@${esc(x.handle)}</span></div><b>${esc(x.n)}</b></div>`).join('')}</div>` : ''}
+    <h2>Behoud per week</h2>
+    <div class="sub" style="margin-bottom:8px">Van de mensen die in die week begonnen: hoeveel kwamen in hun eerste week terug, en hoeveel zijn er na 30 dagen nog?</div>
+    <div class="card">${cohorts.length ? cohorts.map((c) => `<div class="row"><div class="grow"><b>Week van ${esc(fmtDay(c.wk))}</b><div class="sub">${esc(c.signed_up)} nieuw</div></div>
+      <div class="sub" style="text-align:right">week 1: <b>${esc(pct(c.week1, c.signed_up, c.week1_known))}</b><br>na 30 d: <b>${esc(pct(c.day30, c.signed_up, c.day30_known))}</b></div></div>`).join('') : '<div class="empty">Nog geen gegevens</div>'}</div>
+    <h2>Crashes</h2>
+    <div class="card">${(cr.recent || []).length ? `<div class="sub" style="margin-bottom:6px">${esc(cr.last_7d)} in de laatste 7 dagen</div>` + cr.recent.map((x) => `<div class="row"><div class="grow"><div class="ell"><b>${esc(x.message || 'Crash')}</b></div><div class="sub">${esc(fmtDate(x.created_at))} · ${esc(x.platform)} ${esc(x.app_version)} · ${esc(x.device)}</div></div></div>`).join('') : '<div class="empty">Geen crashes gemeld 👌</div>'}</div>
+    <h2>Omzet</h2>
+    <div class="grid">
+      ${t('€ ' + Number(rev.mrr_eur || 0).toFixed(2).replace('.', ','), 'per maand (MRR)', Number(rev.mrr_eur) > 0)}
+      ${t((rev.monthly_subs || 0) + (rev.weekly_subs || 0), 'betalende zaken')}
+    </div>
+    ${String(rev.subscriptions_enabled) !== 'true' ? '<div class="sub" style="margin-top:6px">Abonnementen voor zaken staan nog uit.</div>' : ''}
+    <h2>Bericht naar alle gebruikers</h2>
+    <div class="card stack">
+      <div class="sub">Een pushmelding naar iedereen die meldingen aan heeft. Max. 1 keer per uur. Stuur eerst een test naar jezelf.</div>
+      <input id="bc-title" maxlength="80" placeholder="Titel, bv. Lure Drop vanavond 🎯">
+      <textarea id="bc-body" maxlength="240" rows="3" placeholder="Tekst" style="width:100%;box-sizing:border-box;font:inherit;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text)"></textarea>
+      <div style="display:flex;gap:8px"><button class="small ghost" id="bc-test">Test naar mij</button><button class="small" id="bc-send">Stuur naar iedereen</button></div>
+    </div>`;
+  const syncBtn = $('#asc-sync');
+  if (syncBtn) syncBtn.onclick = async () => { syncBtn.disabled = true; await hqGrowth('apple_sync').catch(() => {}); toast('Apple wordt opgehaald… kijk over een minuut weer'); };
+  const send = async (test) => {
+    const title = $('#bc-title').value.trim(), body = $('#bc-body').value.trim();
+    if (!title || !body) return toast('Vul titel en tekst in');
+    if (!test && !confirm(`Naar ALLE gebruikers sturen?\n\n${title}\n${body}`)) return;
+    try { const r = await hqGrowth('broadcast', { title, body, test }); toast(test ? 'Test verstuurd' : `Verstuurd naar ${r.sent_to} telefoons`); }
+    catch (e) { toast(e.message === 'key' ? '' : e.message); }
+  };
+  $('#bc-test').onclick = () => send(true);
+  $('#bc-send').onclick = () => send(false);
 }
 
 // ---------- Gebruik (wat mensen echt doen in de app)
