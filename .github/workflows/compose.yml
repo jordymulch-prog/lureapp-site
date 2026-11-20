@@ -15,6 +15,7 @@ jobs:
       - name: Compose pending jobs
         run: |
           set -e
+          shopt -s nullglob
           for job in ig/jobs/*.json; do
             out=$(jq -r .out "$job"); type=$(jq -r .type "$job"); url=$(jq -r .media_url "$job"); ov=$(jq -r .overlay "$job")
             # only Higgsfield's own CDN
