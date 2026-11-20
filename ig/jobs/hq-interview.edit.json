@@ -1,0 +1,11 @@
+{"out": "ig/hq-interview",
+ "music": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171042_6b954491-56a5-44ab-a73b-e89b1c25fdf4.mp3",
+ "music_volume": 0.12,
+ "cover_at": 9.0,
+ "segments": [
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_174901_225e079e-abd4-439c-adc3-a904444e9a54.mp4", "dur": 6, "audio": true, "overlay": "ig/jobs/hq-interview/c0.png"},
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_174902_8b2b15e1-9db6-4779-9a1a-2a64eb1e2de0.mp4", "dur": 8, "audio": true, "overlay": "ig/jobs/hq-interview/c1.png"},
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_174901_b3799508-c24b-4694-8111-7eb6e20f12c5.mp4", "dur": 8, "audio": true, "overlay": "ig/jobs/hq-interview/c2.png"},
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_174902_6a283be1-0552-4f0b-9b3c-d2929aa2db07.mp4", "dur": 8, "audio": true, "overlay": "ig/jobs/hq-interview/c3.png"},
+  {"src": "ig/jobs/hq-interview/end.mp4", "dur": 2.3}
+ ]}

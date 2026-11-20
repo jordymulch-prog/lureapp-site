@@ -94,6 +94,25 @@ h1 em{{font-style:normal;color:#FF6A3D}}
 <div class="t"><h1>{esc(s.get('title')).replace('[', '<em>').replace(']', '</em>')}</h1></div></body></html>"""
 
 
+def caption_html(s):
+    """Interview layer: question on top, name tag lower third, optional subtitle line."""
+    q = f'<div class="q">{esc(s["question"])}</div>' if s.get("question") else ""
+    tag = (f'<div class="tag"><b>{esc(s["name"])}</b><span>{esc(s.get("role", ""))}</span></div>' if s.get("name") else "")
+    sub = f'<div class="sub">{esc(s["sub"])}</div>' if s.get("sub") else ""
+    return f"""<html><head><style>{BASE}
+body{{background:transparent}}
+.shade{{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,18,.55) 0%,rgba(12,11,18,0) 22%,rgba(12,11,18,0) 62%,rgba(12,11,18,.7) 100%)}}
+.brand{{position:absolute;top:96px;left:84px;display:flex;align-items:center;gap:16px;font-weight:700;font-size:38px}}
+.brand img{{width:64px;height:64px;border-radius:16px}}
+.q{{position:absolute;top:210px;left:70px;right:70px;text-align:center;font-weight:700;font-size:66px;line-height:1.1;
+   background:#fff;color:#0C0B12;border-radius:28px;padding:26px 34px;box-shadow:0 18px 50px rgba(0,0,0,.35)}}
+.tag{{position:absolute;left:70px;bottom:330px;background:#FF6A3D;color:#1A0B05;border-radius:22px;padding:18px 30px;display:flex;flex-direction:column}}
+.tag b{{font-size:52px;line-height:1.05}}
+.tag span{{font-size:32px;font-weight:600;opacity:.85}}
+.sub{{position:absolute;left:70px;right:70px;bottom:170px;text-align:center;font-weight:700;font-size:46px;line-height:1.2;text-shadow:0 4px 18px rgba(0,0,0,.8)}}
+</style></head><body><div class="shade"></div><div class="brand"><img src="file://{ICON}">Lure HQ</div>{q}{tag}{sub}</body></html>"""
+
+
 def main(path):
     spec = json.load(open(path))
     outdir = os.path.join(ROOT, spec["dir"])
@@ -102,8 +121,8 @@ def main(path):
         b = p.chromium.launch(channel="chrome") if os.path.exists("/usr/bin/google-chrome") else p.chromium.launch()
         for s in spec["scenes"]:
             page_file = os.path.join(tmp, s["id"] + ".html")
-            if s["type"] == "overlay":
-                open(page_file, "w").write(overlay_html(s))
+            if s["type"] in ("overlay", "caption"):
+                open(page_file, "w").write(overlay_html(s) if s["type"] == "overlay" else caption_html(s))
                 pg = b.new_page(viewport={"width": W, "height": H})
                 pg.goto("file://" + page_file)
                 pg.wait_for_timeout(500)
