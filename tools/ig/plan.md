@@ -21,6 +21,12 @@ Rules: the crew may act out scripted stories ("I met my best friend at an ESN pa
 
 Kling 3.0 costs: 6 s = 12 credits, 8 s = 16 credits (std, sound on). One speaker per shot works best; the interviewer can ask from off-screen. Interview layer: `scenes.py` type `caption` (question on top, name tag). Cut with `edit.py` (`"audio": true` keeps the speech, music at `"music_volume": 0.12`).
 
+## Realism first (Jordy, 21 Nov 2026)
+Jordy wants the images AND the voices as realistic as possible. Treat this as a hard quality gate for every crew shot:
+- **Images:** prompt like a real phone or documentary camera: natural daylight or practical lamps, slight handheld movement, real skin texture, no plastic glow, no over-smooth faces, no perfect symmetry, normal clothes with creases. Keep motion small and natural (talking, a nod, a hand gesture); no big camera moves or fast actions, those break faces and hands.
+- **Voices:** describe the voice in the Kling prompt every time and keep it the same per person (Daan: warm, relaxed, young Dutch man speaking English with a light Dutch accent; Mila: calm, clear, light Dutch accent; Yusuf: friendly, low, Amsterdam accent; Lotte: bright, quick, light Dutch accent). Casual spoken English with small pauses and contractions; never announcer or ad-read tone. Lines short (max ~12 words per 6 s shot) so the speech isn't rushed.
+- **Check before posting:** extract frames every 0.5 s around faces and hands; look for warped hands, teeth, eyes, jumping faces, a face that doesn't match the still, lips that don't move with the speech. If a shot fails, regenerate it once (within budget) or cut it and use app scenes instead. Never post a shot that looks fake. You cannot listen to audio yourself: keep the speech short and natural by prompt, check the lip movement on frames, and in your report ask Jordy to tell you if a voice sounds off.
+
 ## The 10 posts
 | # | plan id | Format | Idea | Credits |
 |---|---|---|---|---|
