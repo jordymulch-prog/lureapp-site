@@ -17,7 +17,7 @@ Always start crew shots from these Higgsfield stills (use the job id as `start_i
 
 Setting: Lure HQ, a startup office in an Amsterdam canal house (warm wood, plants, canal windows, orange wall with neon lines, wall screen with a city map). For scenes elsewhere (bar, street, event), generate a new still with nano_banana that describes the same person precisely, then animate it.
 
-Rules: the crew may act out scripted stories ("I met my best friend at an ESN party, we scanned each other on Lure"), like actors in a commercial. Every crew post caption ends with the line "Lure crew is virtual (AI)." Facts they say about the app or numbers must be true (check the database).
+Rules: the crew may act out scripted stories ("I met my best friend at an ESN party, we scanned each other on Lure"), like actors in a commercial. Do NOT write anything about AI in the caption. Instagram has its own "AI-label toevoegen" switch for realistic AI photos and videos; Windsor.ai cannot set it, so Jordy switches it on himself. In your report, remind him which post needs the AI label. Facts they say about the app or numbers must be true (check the database).
 
 Kling 3.0 costs: 6 s = 12 credits, 8 s = 16 credits (std, sound on). One speaker per shot works best; the interviewer can ask from off-screen. Interview layer: `scenes.py` type `caption` (question on top, name tag). Cut with `edit.py` (`"audio": true` keeps the speech, music at `"music_volume": 0.12`).
 
