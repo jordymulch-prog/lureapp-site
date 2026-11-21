@@ -8,6 +8,33 @@
   "media_id": "18193256464363046",
   "file": "ig/launch-reel.mp4",
   "note": "Week 1 launch brand Reel, approved by Jordy. 4 Kling 3.0 shots + real app + ElevenLabs music.",
-  "plan": "launch-reel"
+  "plan": "launch-reel",
+  "stats": {
+   "checked": "2026-11-21",
+   "likes": null,
+   "comments": 0,
+   "views": 1,
+   "reach": 1,
+   "shares": 0,
+   "saved": 0
+  }
+ },
+ {
+  "date": "2026-11-21",
+  "plan": "hq-interview",
+  "pillar": "Lure news / crew",
+  "format": "reel",
+  "city": null,
+  "title": "Inside Lure HQ",
+  "caption": "Inside Lure HQ. Three questions, one mic.\n\nDaan sat down with Mila (cities), Yusuf (product) and Lotte (community) in our canal house office to ask what Lure is actually for.\n\nWhat should we ask them next? Drop your question below.\n\nFree on iPhone · link in bio\n\n#lureapp #amsterdam #insidethestartup #goingout #studentlife",
+  "file": "ig/hq-interview.mp4",
+  "media_id": "17958010809038026",
+  "credits": 0,
+  "note": "Plan post 1, approved earlier by Jordy, posted as is at ~11:50 UTC. Needs Instagram AI label (realistic AI people).",
+  "account_snapshot": {
+   "followers": 2,
+   "media_count": 3,
+   "higgsfield_balance": 90.04
+  }
  }
 ]
