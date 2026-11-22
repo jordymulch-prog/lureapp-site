@@ -10,11 +10,11 @@
   "note": "Week 1 launch brand Reel, approved by Jordy. 4 Kling 3.0 shots + real app + ElevenLabs music.",
   "plan": "launch-reel",
   "stats": {
-   "checked": "2026-11-21",
-   "likes": null,
+   "checked": "2026-11-22",
+   "likes": 1,
    "comments": 0,
-   "views": 1,
-   "reach": 1,
+   "views": 16,
+   "reach": 13,
    "shares": 0,
    "saved": 0
   }
@@ -35,6 +35,32 @@
    "followers": 2,
    "media_count": 3,
    "higgsfield_balance": 90.04
+  },
+  "stats": {
+   "checked": "2026-11-22",
+   "likes": 1,
+   "comments": 0,
+   "views": 96,
+   "reach": 80,
+   "shares": 1,
+   "saved": 0
+  }
+ },
+ {
+  "date": "2026-11-22",
+  "plan": "group-chat",
+  "pillar": "Going-out moments",
+  "format": "reel",
+  "city": null,
+  "title": "9 PM. Group chat: \"idk, you guys?\"",
+  "caption": "POV: it's 9 PM and the group chat still says \"idk, you guys?\"\n\nLotte gave up waiting and opened Lure. One vote on where everyone's going tonight, the winner gets picked in the evening. Plan made.\n\nTag the friend who never decides.\n\nFree on iPhone · link in bio\n\n#lureapp #groupchat #goingout #studentlife #amsterdam",
+  "file": "ig/group-chat.mp4",
+  "credits": 17,
+  "note": "Plan post 2. Lotte on her sofa (nano_banana still from her crew still, 1 cr) + Kling 3.0 8 s sound on (16 cr) + real app map scene (Lure Drop vote) + end card. Needs Instagram AI label (realistic AI person).",
+  "account_snapshot": {
+   "followers": 2,
+   "media_count_before": 3,
+   "higgsfield_balance": 73.04
   }
  }
 ]
