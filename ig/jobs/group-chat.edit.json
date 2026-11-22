@@ -1,0 +1,10 @@
+{"out": "ig/group-chat",
+ "music": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171042_6b954491-56a5-44ab-a73b-e89b1c25fdf4.mp3",
+ "music_volume": 0.2,
+ "cover_at": 1.5,
+ "segments": [
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261122_115052_b51b295c-4c07-4ca4-ae13-56228725aab6.mp4", "skip": 0.6, "dur": 6.0, "audio": true, "overlay": "ig/jobs/group-chat/t1.png"},
+  {"src": "ig/jobs/group-chat/map.mp4", "dur": 3.2},
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261122_115052_b51b295c-4c07-4ca4-ae13-56228725aab6.mp4", "skip": 6.8, "dur": 1.2, "audio": true, "overlay": "ig/jobs/group-chat/t3.png"},
+  {"src": "ig/jobs/group-chat/end.mp4", "dur": 2.3}
+ ]}
