@@ -33,7 +33,66 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 ICON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icon.png")
 
 
+def crop_phone(src: str) -> str:
+    """Cut the phone out of a real App Store screenshot (appstore/*.png) -> temp PNG path."""
+    from PIL import Image
+    im = Image.open(os.path.join(ROOT, src)).convert("RGB")
+    w, h = im.size
+    out = os.path.join(tempfile.gettempdir(), "phone-" + os.path.basename(src))
+    im.crop((int(w * 0.128), int(h * 0.308), int(w * 0.872), h)).save(out)
+    return out
+
+
+def shot_html(s: dict) -> str:
+    """Step slide with the REAL app: headline on top, phone below, optional zoomed callout of one UI element.
+    Keys: shot (appstore/*.png), step ("1"), title (use [word] for orange), sub, kicker,
+    phone_y (top of phone in px, default 560), phone_w (default 620),
+    focus [x0,y0,x1,y1] as fractions of the cropped phone screen -> zoomed callout with an orange ring."""
+    e = lambda t: html.escape(t or "").replace("\n", "<br>").replace("[", "<em>").replace("]", "</em>")
+    from PIL import Image
+    img = crop_phone(s["shot"])
+    iw, ih = Image.open(img).size
+    pw, py = s.get("phone_w", 620), s.get("phone_y", 560)
+    ph = pw * ih / iw
+    call = ""
+    if s.get("focus"):
+        x0, y0, x1, y1 = s["focus"]
+        cw = s.get("callout_w", 900)
+        k = cw / ((x1 - x0) * pw)  # zoom so the element is cw px wide
+        chh = (y1 - y0) * ph * k
+        cy = py + (y0 + y1) / 2 * ph - chh / 2 + s.get("callout_dy", 0)
+        ring = (f"position:absolute;left:{(1080 - cw) / 2:.0f}px;top:{cy:.0f}px;width:{cw}px;height:{chh:.0f}px;"
+                f"border-radius:{s.get('callout_r', 30)}px;overflow:hidden;outline:6px solid #FF6A3D;outline-offset:6px;"
+                "box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 18px rgba(255,106,61,.18)")
+        inner = (f"position:absolute;left:{-x0 * pw * k:.0f}px;top:{-y0 * ph * k:.0f}px;width:{pw * k:.0f}px;height:{ph * k:.0f}px")
+        call = f'<div style="{ring}"><img src="file://{img}" style="{inner}"></div>'
+    step = f'<div class="num">{html.escape(s["step"])}</div>' if s.get("step") else ""
+    return f"""<!doctype html><html><head><meta charset="utf-8"><style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+html,body{{width:1080px;height:1350px;overflow:hidden}}
+body{{background:radial-gradient(900px 800px at 50% 75%,rgba(255,106,61,.42),transparent 65%),radial-gradient(700px 600px at 0% 0%,rgba(61,214,196,.16),transparent 60%),#0C0B12;
+  color:#fff;font-family:'Poppins',sans-serif;position:relative}}
+.top{{position:absolute;top:70px;left:84px;right:84px;display:flex;align-items:center;gap:18px}}
+.top img{{width:64px;height:64px;border-radius:16px}}
+.brand{{font-weight:700;font-size:38px}}
+.kick{{margin-left:auto;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-weight:700;font-size:24px;padding:10px 22px;border-radius:999px;letter-spacing:1.5px}}
+.head{{position:absolute;top:185px;left:84px;right:84px;display:flex;gap:28px;align-items:flex-start}}
+.num{{flex:none;width:96px;height:96px;border-radius:50%;background:#FF6A3D;color:#1A0B05;font-weight:700;font-size:58px;display:flex;align-items:center;justify-content:center;margin-top:6px}}
+h1{{font-weight:700;font-size:{s.get('size', 84)}px;line-height:1.02;letter-spacing:-2px}}
+h1 em{{font-style:normal;color:#FF6A3D}}
+.sub{{margin-top:18px;font-size:34px;line-height:1.3;color:#E9E3F2;opacity:.88;font-weight:500}}
+.ph{{position:absolute;left:{(1080 - pw) / 2:.0f}px;top:{py}px;width:{pw}px}}
+.ph img{{width:100%;display:block;border-radius:{pw * 0.137:.0f}px {pw * 0.137:.0f}px 0 0;box-shadow:0 50px 120px rgba(0,0,0,.65)}}
+.dim{{position:absolute;inset:0;border-radius:{pw * 0.137:.0f}px {pw * 0.137:.0f}px 0 0;background:rgba(12,11,18,{s.get('dim', 0.35 if s.get('focus') else 0)})}}
+</style></head><body>
+<div class="top"><img src="file://{ICON}"><div class="brand">Lure</div>{f'<div class="kick">{html.escape(s["kicker"])}</div>' if s.get("kicker") else ''}</div>
+<div class="head">{step}<div><h1>{e(s.get('title'))}</h1>{f'<div class="sub">{e(s.get("sub"))}</div>' if s.get('sub') else ''}</div></div>
+<div class="ph"><img src="file://{img}"><div class="dim"></div></div>{call}</body></html>"""
+
+
 def page_html(s: dict, w: int, h: int, animate: bool) -> str:
+    if s.get("shot"):
+        return shot_html(s)
     e = lambda t: html.escape(t or "").replace("\n", "<br>")
     items = "".join(
         f'<div class="it" style="animation-delay:{1.2 + i * 0.35:.2f}s"><span class="pin"></span>{e(x)}</div>'
@@ -77,7 +136,7 @@ h1 em{{font-style:normal;color:#FF6A3D}}
 {anim}
 </style></head><body>{'<div class="shade"></div>' if s.get("transparent") else '<div class="grid"></div>'}<div class="wrap">
 <div class="top"><img src="file://{ICON}"><div class="brand">Lure</div>{f'<div class="kick">{e(s.get("kicker"))}</div>' if s.get("kicker") else ''}</div>
-<div class="mid"><h1>{e(s.get('title')).replace('*', '')}</h1>
+<div class="mid"><h1>{e(s.get('title')).replace('*', '').replace('[', '<em>').replace(']', '</em>')}</h1>
 {f'<div class="sub">{e(s.get("subtitle"))}</div>' if s.get('subtitle') else ''}
 {f'<div class="list">{items}</div>' if items else ''}
 {f'<div class="cta">{e(s.get("cta"))}</div>' if s.get('cta') else ''}</div></div></body></html>"""

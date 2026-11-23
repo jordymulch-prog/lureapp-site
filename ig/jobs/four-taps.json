@@ -1,0 +1,87 @@
+{
+ "out": "ig/four-taps",
+ "slides": [
+  {
+   "shot": "appstore/lure-appstore-1-map.png",
+   "kicker": "HOW LURE WORKS",
+   "title": "4 taps to a\n[night out].",
+   "sub": "From “idk, you guys?” to a plan. Swipe →",
+   "size": 100,
+   "phone_y": 500,
+   "phone_w": 760
+  },
+  {
+   "shot": "appstore/lure-appstore-1-map.png",
+   "step": "1",
+   "kicker": "STEP 1 / 4",
+   "title": "Open the [map].",
+   "sub": "The best cafés, bars and clubs around you, live.",
+   "focus": [
+    0.03,
+    0.212,
+    0.93,
+    0.266
+   ],
+   "callout_w": 900,
+   "phone_y": 520
+  },
+  {
+   "shot": "appstore/lure-appstore-2-friends.png",
+   "step": "2",
+   "kicker": "STEP 2 / 4",
+   "title": "Scan your [friends].",
+   "sub": "Met someone tonight? Scan each other’s code. Done.",
+   "focus": [
+    0.045,
+    0.18,
+    0.957,
+    0.497
+   ],
+   "callout_w": 860,
+   "phone_y": 520
+  },
+  {
+   "shot": "appstore/lure-appstore-1-map.png",
+   "step": "3",
+   "kicker": "STEP 3 / 4",
+   "title": "Vote on [tonight].",
+   "sub": "Everyone picks a spot. At 21:00 one wins.",
+   "focus": [
+    0.04,
+    0.272,
+    0.958,
+    0.347
+   ],
+   "callout_w": 920,
+   "phone_y": 520
+  },
+  {
+   "shot": "appstore/lure-appstore-1-map.png",
+   "step": "4",
+   "kicker": "STEP 4 / 4",
+   "title": "Tap [+ Plan].",
+   "sub": "Pick a spot and a time. Your friends get a message.",
+   "phone_y": 420,
+   "focus": [
+    0.5,
+    0.752,
+    0.935,
+    0.802
+   ],
+   "callout_w": 620,
+   "phone_w": 500
+  },
+  {
+   "kicker": "SAVE THIS",
+   "title": "Save this\nfor [Friday].",
+   "items": [
+    "1 · Open the map",
+    "2 · Scan your friends",
+    "3 · Vote on tonight",
+    "4 · Tap + Plan"
+   ],
+   "cta": "Plan. Post. Meet. · Free on iPhone",
+   "size": 120
+  }
+ ]
+}

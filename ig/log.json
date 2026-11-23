@@ -63,5 +63,24 @@
    "higgsfield_balance": 73.04
   },
   "media_id": "18349294801253799"
+ },
+ {
+  "date": "2026-11-23",
+  "plan": "four-taps",
+  "pillar": "How Lure works",
+  "format": "carousel",
+  "city": null,
+  "title": "4 taps to a night out",
+  "caption": "4 taps from \"idk, you guys?\" to an actual plan.\n\n1. Open the map: cafés, bars and clubs around you.\n2. Met someone? Scan each other's Lure code.\n3. Vote on tonight. At 21:00 one spot wins.\n4. Tap + Plan, pick a spot and a time. Your friends get a message.\n\nSave this for Friday.\n\nWhat's the usual excuse in your group chat for staying in?\n\nFree on iPhone · link in bio\n\n#lureapp #nightout #goingout #studentlife #amsterdam",
+  "files": [
+   "ig/four-taps-1.jpg",
+   "ig/four-taps-2.jpg",
+   "ig/four-taps-3.jpg",
+   "ig/four-taps-4.jpg",
+   "ig/four-taps-5.jpg",
+   "ig/four-taps-6.jpg"
+  ],
+  "credits": 0,
+  "note": "Plan post 3. Human-first: real App Store screens only (map, friends), zoomed callouts; facts checked in app repo (vote till 21:00, code changes every 2 min, plan sends friends a message). Goal: saves. New 'shot' layout in tools/ig/render.py."
  }
 ]
