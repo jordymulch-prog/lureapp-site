@@ -10,11 +10,11 @@
   "note": "Week 1 launch brand Reel, approved by Jordy. 4 Kling 3.0 shots + real app + ElevenLabs music.",
   "plan": "launch-reel",
   "stats": {
-   "checked": "2026-11-22",
+   "checked": "2026-11-23",
    "likes": 1,
    "comments": 0,
-   "views": 16,
-   "reach": 13,
+   "views": 21,
+   "reach": 17,
    "shares": 0,
    "saved": 0
   }
@@ -37,11 +37,11 @@
    "higgsfield_balance": 90.04
   },
   "stats": {
-   "checked": "2026-11-22",
+   "checked": "2026-11-23",
    "likes": 1,
    "comments": 0,
-   "views": 96,
-   "reach": 80,
+   "views": 98,
+   "reach": 81,
    "shares": 1,
    "saved": 0
   }
@@ -62,7 +62,16 @@
    "media_count_before": 3,
    "higgsfield_balance": 73.04
   },
-  "media_id": "18349294801253799"
+  "media_id": "18349294801253799",
+  "stats": {
+   "checked": "2026-11-23",
+   "likes": 0,
+   "comments": 0,
+   "views": 16,
+   "reach": 14,
+   "shares": 0,
+   "saved": 0
+  }
  },
  {
   "date": "2026-11-23",
@@ -81,6 +90,12 @@
    "ig/four-taps-6.jpg"
   ],
   "credits": 0,
-  "note": "Plan post 3. Human-first: real App Store screens only (map, friends), zoomed callouts; facts checked in app repo (vote till 21:00, code changes every 2 min, plan sends friends a message). Goal: saves. New 'shot' layout in tools/ig/render.py."
+  "note": "Plan post 3. Human-first: real App Store screens only (map, friends), zoomed callouts; facts checked in app repo (vote till 21:00, code changes every 2 min, plan sends friends a message). Goal: saves. New 'shot' layout in tools/ig/render.py.",
+  "media_id": "18154482247514252",
+  "posted_utc": "2026-11-23T17:54",
+  "account_snapshot": {
+   "followers": 2,
+   "media_count": 5
+  }
  }
 ]
