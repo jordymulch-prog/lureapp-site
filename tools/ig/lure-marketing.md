@@ -1,5 +1,8 @@
 # Lure: the marketing story (read before every post)
 
+## Learning loop (Jordy, 24 Nov 2026)
+Every run follows `tools/ig/skills/learning/SKILL.md`: read `ig/learnings.md` (playbook + open experiment) before making the post; after posting measure, diagnose the weakest funnel stage, research (incl. trends), run one experiment at a time and update `ig/learnings.md` and `plan.md`. The playbook rules there apply on top of this file, never against its hard rules or Jordy's own decisions.
+
 ## Comments + selling (Jordy, 24 Nov 2026). This is the strategy now; it overrides "Human-first" where they conflict.
 Jordy, after the first 4 posts: the crew interview Reel (81 reach, 98 views, 1 share) beat everything; photos and carousels barely moved (four-taps carousel: 1 reach after a day). His words: the content must make the viewer react, and at the same time sell Lure. So every post has **two jobs, both required: get comments, and sell Lure.**
 

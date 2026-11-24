@@ -1,6 +1,6 @@
 # Lure Instagram: content plan (approved by Jordy 20 Nov 2026, made human-first on 22 Nov 2026)
 
-**Read `tools/ig/lure-marketing.md` section "Comments + selling" (24 Nov 2026) first. It overrides anything below that conflicts with it.**
+**Read `tools/ig/lure-marketing.md` section "Comments + selling" (24 Nov 2026) first. It overrides anything below that conflicts with it.** Then read `ig/learnings.md` (playbook + open experiment) and follow `tools/ig/skills/learning/SKILL.md`; the loop may rework upcoming posts below when the data says so.
 
 Post the next post in this list that is not yet in `ig/log.json` (match on the "plan" field). After post 10, write a new list of 10 in the same style, based on what performed best (reach, shares, saves, comments in the log), and keep going.
 
