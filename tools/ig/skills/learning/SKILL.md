@@ -53,7 +53,7 @@ The memory of this loop is **`ig/learnings.md`** (playbook, experiments, researc
 - **Trial Reels for hook tests (no extra credits):** cut a second version of the same video with a different first 2 seconds and publish it with `create_video_post` + `trial_params: {"graduation_strategy": "SS_PERFORMANCE"}` (shown only to non-followers; Instagram shares it with followers if it performs). Compare skip rate and watch time of the two versions. Log both media ids.
 - Targets are relative to our own baseline (median of judged posts), not industry numbers.
 
-## Weekly review (Sunday run)
+## Weekly review (Monday run, the first run of the week)
 - Compare per series, per hook type, per comment-prompt type, per format and per time slot.
 - Rewrite the next posts in `plan.md` from the winners; drop losers.
 - Update the baseline table.
