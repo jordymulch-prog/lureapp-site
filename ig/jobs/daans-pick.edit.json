@@ -1,0 +1,7 @@
+{"out": "ig/daans-pick", "music": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261120_171042_6b954491-56a5-44ab-a73b-e89b1c25fdf4.mp3", "music_volume": 0.12, "cover_at": 1.0,
+ "segments": [
+  {"src": "https://d8j0ntlcm91z4.cloudfront.net/user_3JltQqlvjuFsZ7XRvgyKVFJTKvl/hf_20261124_144259_bd257b30-d4f3-46a3-832f-f37fce0638dd.mp4", "dur": 6.0, "audio": true, "overlay": "ig/jobs/daans-pick/c0.png"},
+  {"src": "ig/jobs/daans-pick/a.mp4", "dur": 2.8},
+  {"src": "ig/jobs/daans-pick/b.mp4", "dur": 2.8},
+  {"src": "ig/jobs/daans-pick/end.mp4", "dur": 3.2}
+ ]}
