@@ -1,6 +1,20 @@
 # Lure: the marketing story (read before every post)
 
-## Human-first (Jordy, 22 Nov 2026). This overrides older rules below.
+## Comments + selling (Jordy, 24 Nov 2026). This is the strategy now; it overrides "Human-first" where they conflict.
+Jordy, after the first 4 posts: the crew interview Reel (81 reach, 98 views, 1 share) beat everything; photos and carousels barely moved (four-taps carousel: 1 reach after a day). His words: the content must make the viewer react, and at the same time sell Lure. So every post has **two jobs, both required: get comments, and sell Lure.**
+
+1. **The crew is back** (Daan, Mila, Yusuf, Lotte; stills and voices in `plan.md`) as recurring characters people follow in fixed series. Realistic AI people and voices are allowed again, for the crew only. Jordy switches on Instagram's AI label himself: name the post that needs it in every report. Never write about AI in the caption.
+2. **Comments:** the post asks the viewer something they can answer in one word or a few seconds, and the answer *matters*: it decides the next episode, the next city, the next question. The question is on screen in the last seconds AND is the caption's one question.
+   - Prompts that work (pick one per post): A or B ("Bar or club?"); you decide what happens next; name your city; fill in the blank ("The group chat always dies when ___"); the question for the next episode.
+   - Avoid: "What do you think?", "Thoughts?", tag-a-friend as the only prompt, anything that needs a long answer.
+3. **Selling:** the real app is the turning point of every story: the crew's problem gets solved on a real Lure screen (phone scene from `appstore/` via `scenes.py`). Then the end card "Free on iPhone" and the caption CTA. Say one concrete thing the app does (vote till 21:00, scan to add, see the map), not "download now".
+4. **Reel formula (12-20 s):** hook line the viewer recognises (1st second) → crew moment (one 6 s Higgsfield Kling 3.0 shot from the crew still) → real app scene solves it → comment prompt on screen → end card.
+5. **Close the loop:** the next episode uses what people actually commented ("You picked club."), without names or usernames. If nobody answered, say so honestly ("No votes yet, so Lotte picked.") and ask again. Never invent comments or votes.
+6. **Format mix:** mostly crew Reels. A carousel or photo only when it carries a vote or a result, never as plain info.
+7. **Measure:** log comments and comments per reach for every post. Every 5 posts, compare which series and which prompt type brought the most comments and make more of that.
+8. **Still true from Human-first:** facts about the app and numbers must be real (check the app repo/database); real spots from the database; no fake reviews or testimonials: the crew are characters in scenes, never presented as customers praising Lure; never invent quotes from Jordy; footage Jordy sends himself still goes first (add the comment prompt and the app moment to it).
+
+## Human-first (Jordy, 22 Nov 2026). Partly replaced on 24 Nov by "Comments + selling" above (crew and AI people are back); the honesty rules still apply.
 Jordy wants the content **more human and more professional**. Research on how the big AI/software companies do it (Nov 2026):
 - **OpenAI (ChatGPT, first global campaign, Sept 2025):** dropped abstract tech visuals for real young people in everyday moments (road trip, cooking for a date, a pull-up). Shot on 35mm film for warmth; "unpolished in-between moments", "humanity... a clear focus on people".
 - **Anthropic (Claude, "Keep Thinking", Sept 2025 and 2026):** real employees (researchers) and real users on the posters; honest, calm tone that names doubts instead of hyping.
@@ -9,7 +23,7 @@ Jordy wants the content **more human and more professional**. Research on how th
 - **Audience data:** when people *suspect* content is AI, it is rated 48% less trustworthy, 57% less authentic, with 60% lower emotional connection (Raptive, 3,000 US adults, 2025), even when it wasn't AI. Only 26% of consumers think AI-made creator content performs better, down from 60% in 2023 (Billion Dollar Boy).
 
 What that means for Lure from now on:
-1. **No realistic AI people.** The AI crew (Daan, Mila, Yusuf, Lotte) is paused. No AI faces, no AI voices. AI may only be used for small non-human details (a texture, a background), never as "proof".
+1. ~~No realistic AI people.~~ (Replaced 24 Nov: the crew is back, see above.) The AI crew (Daan, Mila, Yusuf, Lotte) was paused. No AI faces, no AI voices. AI may only be used for small non-human details (a texture, a background), never as "proof".
 2. **Real proof only:** the real app (App Store screens, phone scenes), real spots and real numbers from the database, Jordy's own words.
 3. **A real face:** Jordy is the founder and the face. Content in his voice ("Notes from the founder"), only with sentences he actually wrote or said. Never invent quotes, opinions or stories for him. When Jordy sends real footage or photos (himself, friends who agreed, Amsterdam streets, a night out), that footage goes first: cut it with `edit.py`, add text and the end card.
 4. **Professional = consistent:** fixed series ("Notes from the founder", "This week at Lure", "City tonight", "How Lure works"), one design system (dark #0C0B12, Lure orange, teal, Poppins Bold), every cover readable in the grid, carousels 1080x1350, max ~6 words per slide headline, alt text on images.
