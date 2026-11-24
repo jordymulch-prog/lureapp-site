@@ -97,5 +97,39 @@
    "followers": 2,
    "media_count": 5
   }
+ },
+ {
+  "date": "2026-11-25",
+  "plan": "ask-hq-2",
+  "pillar": "Crew series: Ask Lure HQ",
+  "format": "reel",
+  "title": "First thing you do in a new city?",
+  "caption": "First thing you do in a new city?\n\nMila (cities) opens Lure and checks where everyone's going tonight: the live map of spots, friends who are out, and tonight's vote.\n\nYour first move in a new city? Tell us below.\n\nFree on iPhone · link in bio\n\n#lureapp #newcity #exchangestudent #studentlife #amsterdam",
+  "file": "ig/ask-hq-2.mp4",
+  "cover": "ig/ask-hq-2.jpg",
+  "credits": 12,
+  "experiment": "E1",
+  "status": "scheduled_in_app",
+  "scheduled_for": "2026-11-25 19:00 Europe/Amsterdam",
+  "note": "Made on 24 Nov ahead of the cloud limit; Jordy schedules it himself in the Instagram app (with the AI label). Mila Kling 3.0 6 s (job 7683e2e8) + real map scene + end card with the comment prompt. E1: talking from frame 1, question on screen at 0.0 s. Runs: do NOT post this again; fill in media_id/stats when it shows up in Windsor."
+ },
+ {
+  "date": "2026-11-26",
+  "plan": "daans-pick",
+  "pillar": "Crew series: Daan's pick",
+  "format": "reel",
+  "title": "Tonight in Amsterdam: A or B?",
+  "caption": "Tonight in Amsterdam: A or B?\n\nA · Brouwerij 't IJ: a beer where it's brewed, right next to a windmill.\nB · Melkweg: club nights in an old dairy factory.\n\nBoth are on the Lure map with a tip from the Lure team. Daan goes where you send him.\n\nA or B? Comment the letter.\n\nFree on iPhone · link in bio\n\n#lureapp #amsterdam #amsterdamnightlife #goingout #studentlife",
+  "file": "ig/daans-pick.mp4",
+  "cover": "ig/daans-pick.jpg",
+  "credits": 12,
+  "experiment": "E1 (2nd) + E3 (A/B prompt)",
+  "status": "scheduled_in_app",
+  "scheduled_for": "2026-11-26 19:00 Europe/Amsterdam",
+  "spots": [
+   "Brouwerij 't IJ (bar, Supabase venues, tip: Brewery right next to a windmill)",
+   "Melkweg (culture, tip: Concerts and club nights in a former dairy factory)"
+  ],
+  "note": "Made on 24 Nov ahead of the cloud limit; Jordy schedules it himself in the Instagram app (with the AI label). Daan Kling 3.0 6 s (job bd257b30) + 2 real map scenes + end card. Runs: do NOT post this again; the real A/B comments feed post 9 (results-1)."
  }
 ]
