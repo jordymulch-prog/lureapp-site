@@ -109,9 +109,11 @@
   "cover": "ig/ask-hq-2.jpg",
   "credits": 12,
   "experiment": "E1",
-  "status": "ready",
-  "note": "Made on 24 Nov ahead of the cloud limit; Ready to post: the daily run publishes it on its ready_for date via Windsor (Jordy, 24 Nov: no manual scheduling). Mila Kling 3.0 6 s (job 7683e2e8) + real map scene + end card with the comment prompt. E1: talking from frame 1, question on screen at 0.0 s. Runs: post THIS file on its date instead of making a new post, then set status 'posted' and the media_id; fill in media_id/stats when it shows up in Windsor.",
-  "ready_for": "2026-11-25 19:00 Europe/Amsterdam"
+  "status": "posted",
+  "note": "Made on 24 Nov ahead of the cloud limit; Ready to post: the daily run publishes it on its ready_for date via Windsor (Jordy, 24 Nov: no manual scheduling). Mila Kling 3.0 6 s (job 7683e2e8) + real map scene + end card with the comment prompt. E1: talking from frame 1, question on screen at 0.0 s. Runs: post THIS file on its date instead of making a new post, then set status 'posted' and the media_id; fill in media_id/stats when it shows up in Windsor. | Posted 26 Nov ~18:52 Amsterdam (run of 25 Nov was missed; posted a day late as the oldest ready post).",
+  "ready_for": "2026-11-25 19:00 Europe/Amsterdam",
+  "media_id": "18382658548240817",
+  "posted_at": "2026-11-26T17:52Z"
  },
  {
   "date": "2026-11-26",
@@ -129,7 +131,7 @@
    "Brouwerij 't IJ (bar, Supabase venues, tip: Brewery right next to a windmill)",
    "Melkweg (culture, tip: Concerts and club nights in a former dairy factory)"
   ],
-  "note": "Made on 24 Nov ahead of the cloud limit; Ready to post: the daily run publishes it on its ready_for date via Windsor (Jordy, 24 Nov: no manual scheduling). Daan Kling 3.0 6 s (job bd257b30) + 2 real map scenes + end card. Runs: post THIS file on its date instead of making a new post, then set status 'posted' and the media_id; the real A/B comments feed post 9 (results-1).",
+  "note": "Made on 24 Nov ahead of the cloud limit; Ready to post: the daily run publishes it on its ready_for date via Windsor (Jordy, 24 Nov: no manual scheduling). Daan Kling 3.0 6 s (job bd257b30) + 2 real map scenes + end card. Runs: post THIS file on its date instead of making a new post, then set status 'posted' and the media_id; the real A/B comments feed post 9 (results-1). | 26 Nov: ask-hq-2 (overdue) went out today; daans-pick is next (Fri 27 Nov run).",
   "ready_for": "2026-11-26 19:00 Europe/Amsterdam"
  }
 ]
