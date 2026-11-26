@@ -10,13 +10,17 @@
   "note": "Week 1 launch brand Reel, approved by Jordy. 4 Kling 3.0 shots + real app + ElevenLabs music.",
   "plan": "launch-reel",
   "stats": {
-   "checked": "2026-11-23",
-   "likes": 1,
-   "comments": 0,
-   "views": 21,
    "reach": 17,
+   "views": 21,
+   "skip_rate": 0.833,
+   "avg_watch_s": 4.49,
+   "comments": 0,
    "shares": 0,
-   "saved": 0
+   "saves": 0,
+   "likes": 1,
+   "checked": "2026-11-26",
+   "age_h": 144,
+   "judged": true
   }
  },
  {
@@ -37,13 +41,17 @@
    "higgsfield_balance": 90.04
   },
   "stats": {
-   "checked": "2026-11-23",
-   "likes": 1,
-   "comments": 0,
-   "views": 98,
    "reach": 81,
+   "views": 98,
+   "skip_rate": 0.921,
+   "avg_watch_s": 1.93,
+   "comments": 0,
    "shares": 1,
-   "saved": 0
+   "saves": 0,
+   "likes": 1,
+   "checked": "2026-11-26",
+   "age_h": 126,
+   "judged": true
   }
  },
  {
@@ -64,13 +72,17 @@
   },
   "media_id": "18349294801253799",
   "stats": {
-   "checked": "2026-11-23",
-   "likes": 0,
-   "comments": 0,
-   "views": 16,
    "reach": 14,
+   "views": 16,
+   "skip_rate": 0.929,
+   "avg_watch_s": 1.78,
+   "comments": 0,
    "shares": 0,
-   "saved": 0
+   "saves": 0,
+   "likes": 0,
+   "checked": "2026-11-26",
+   "age_h": 102,
+   "judged": true
   }
  },
  {
@@ -96,6 +108,19 @@
   "account_snapshot": {
    "followers": 2,
    "media_count": 5
+  },
+  "stats": {
+   "reach": 1,
+   "views": 1,
+   "comments": 0,
+   "shares": 0,
+   "saves": 0,
+   "likes": 0,
+   "follows": 0,
+   "profile_visits": 0,
+   "checked": "2026-11-26",
+   "age_h": 72,
+   "judged": true
   }
  },
  {
@@ -113,7 +138,18 @@
   "note": "Made on 24 Nov ahead of the cloud limit; Ready to post: the daily run publishes it on its ready_for date via Windsor (Jordy, 24 Nov: no manual scheduling). Mila Kling 3.0 6 s (job 7683e2e8) + real map scene + end card with the comment prompt. E1: talking from frame 1, question on screen at 0.0 s. Runs: post THIS file on its date instead of making a new post, then set status 'posted' and the media_id; fill in media_id/stats when it shows up in Windsor. | Posted 26 Nov ~18:52 Amsterdam (run of 25 Nov was missed; posted a day late as the oldest ready post).",
   "ready_for": "2026-11-25 19:00 Europe/Amsterdam",
   "media_id": "18382658548240817",
-  "posted_at": "2026-11-26T17:52Z"
+  "posted_at": "2026-11-26T17:49:41Z",
+  "stats": {
+   "reach": 0,
+   "views": 0,
+   "comments": 0,
+   "shares": 0,
+   "saves": 0,
+   "likes": 0,
+   "checked": "2026-11-26",
+   "age_h": 0,
+   "judged": false
+  }
  },
  {
   "date": "2026-11-26",

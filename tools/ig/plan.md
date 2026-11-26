@@ -50,4 +50,6 @@ Budget on 24 Nov: 73 credits until 20 Dec. One 6 s Kling 3.0 shot = 12 credits, 
 
 **Ready posts (24 Nov):** an entry in `ig/log.json` with `"status": "ready"` is already made (video, cover, caption). On its `ready_for` date (or later, if a run was missed) the run posts THAT file via Windsor instead of making a new post, then sets `"status": "posted"` and the media_id. First check with Windsor that nothing was posted today already (no double posts). Posts marked "post on Friday" are only used on a Friday; on other days take the next post.
 
+**Order update (26 Nov):** the 25 Nov run was missed, so ask-hq-2 went out on Thu 26 Nov. Fri 27 Nov: daans-pick (ready, Friday "tonight" fits). Then Sat 28 mila-maps, Sun 29 yusuf-feature, Mon 30 results-1 (real comments of daans-pick only, and say so honestly; lotte-friday-1 is not out yet), Fri 4 Dec lotte-friday-1 (with E4). Tue 1-Thu 3 Dec need posts 11+: write the new list of 10 by the 30 Nov run (December ideas in `ig/learnings.md` research log). Budget 26 Nov: Higgsfield balance 41 credits; lotte-friday-1 + mila-maps + yusuf-feature need ~37, so the new list starts with 0-credit versions until 20 Dec.
+
 After post 10: write the next 10 from what brought the most **comments per reach** (series + prompt type), keep the same rules.
