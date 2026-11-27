@@ -182,12 +182,27 @@
   "cover": "ig/daans-pick-2.jpg",
   "credits": 14.8,
   "experiment": "E5 (lively format + trend hook, ordered by Jordy 27 Nov) + E3 (A/B prompt)",
-  "status": "ready",
+  "status": "shelved",
   "ready_for": "2026-11-27 19:00 Europe/Amsterdam",
   "spots": [
    "Brouwerij 't IJ (bar, tip: brewery next to a windmill)",
    "Melkweg (culture, tip: concerts and club nights in a former dairy factory)"
   ],
-  "note": "Jordy 27 Nov: posts too boring, wants more life + a GTA 6 angle (GTA 6 released 19 Nov 2026). One Kling 3.0 Omni multi-shot 10 s (job 8b71c97c, 12.5 cr: Daan on a canal street at night talking -> beer bar -> club) + ElevenLabs music 16 s (job dbe86df6, 2.3 cr) + own game-style HUD (real Lure map as minimap) + real map zoom + kinetic A/B + end card, 14.9 s, 5 whooshes, cut locally with tools/ig/compose_local.py. No Rockstar assets: only the name as a reference. Frames checked (faces/hands ok). Needs Instagram AI label. The run posts THIS file on its date; real A/B comment counts feed results-1."
+  "note": "Jordy 27 Nov: posts too boring, wants more life + a GTA 6 angle (GTA 6 released 19 Nov 2026). One Kling 3.0 Omni multi-shot 10 s (job 8b71c97c, 12.5 cr: Daan on a canal street at night talking -> beer bar -> club) + ElevenLabs music 16 s (job dbe86df6, 2.3 cr) + own game-style HUD (real Lure map as minimap) + real map zoom + kinetic A/B + end card, 14.9 s, 5 whooshes, cut locally with tools/ig/compose_local.py. No Rockstar assets: only the name as a reference. Frames checked (faces/hands ok). Needs Instagram AI label. The run posts THIS file on its date; real A/B comment counts feed results-1. | 27 Nov (later): Jordy: still too boring, looks too AI, transitions ugly. NOT posted; replaced tonight by gta-friends. Footage may be re-used later only if Jordy agrees."
+ },
+ {
+  "date": "2026-11-27",
+  "plan": "gta-friends",
+  "pillar": "Trend meme (GTA 6 launch), no AI faces",
+  "format": "reel",
+  "title": "my friends before vs after November 19th",
+  "caption": "my friends before November 19th vs after.\n\nGTA 6 is great. Your group chat is dead though. On Lure you vote on where everyone's going tonight and at 21:00 one spot wins, so \"can't, 1 more mission\" turns into an actual plan.\n\nHow many of your friends did GTA 6 take? Give a number.\n\nFree on iPhone · link in bio\n\n#gta6 #groupchat #studentlife #goingout #amsterdam #lureapp",
+  "file": "ig/gta-friends.mp4",
+  "cover": "ig/gta-friends.jpg",
+  "credits": 0,
+  "experiment": "E6 (trend meme, no AI faces, hard cuts on the beat; send-to-a-friend situation)",
+  "status": "ready",
+  "ready_for": "2026-11-27 19:00 Europe/Amsterdam",
+  "note": "Jordy 27 Nov: daans-pick-2 still too boring/too AI, transitions ugly; wanted the GTA 6 'Lucia' trend. Lucia (Rockstar character) NOT used in image or as slogan (IP/strike risk; Lure is not a dating app). Same joke as the trend ('us now' vs 'us on November 19th') but about friends: fictional group chat before/after 19 Nov -> punch card -> real Lure map + vote -> one-number question -> end card. 15.9 s, generic chat UI (no app brands), message pops synthesized, music re-used (ElevenLabs job dbe86df6). No AI people -> no AI label needed. The run posts THIS file tonight (Jordy: 'plaats jij hem')."
  }
 ]

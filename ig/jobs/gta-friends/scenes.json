@@ -1,0 +1,18 @@
+{"dir": "ig/jobs/gta-friends", "scenes": [
+ {"id": "before", "type": "chat", "dur": 2.9, "top": "my friends\n[before] November 19th", "group": "Friday crew",
+  "msgs": [{"from": "Noor", "text": "who's out tonight??", "at": 0.05},
+           {"from": "Sam", "text": "IN", "at": 0.45},
+           {"from": "Jules", "text": "in 🍻", "at": 0.9},
+           {"from": "Tim", "text": "omw already", "at": 1.35},
+           {"me": true, "text": "see you at 10", "at": 1.85}]},
+ {"id": "after", "type": "chat", "dur": 3.9, "top": "my friends\n[after] November 19th", "group": "Friday crew",
+  "msgs": [{"me": true, "text": "anyone out tonight?", "at": 0.05},
+           {"from": "Sam", "text": "can't, 1 more mission", "at": 0.95},
+           {"from": "Jules", "text": "bro it JUST came out", "at": 1.9},
+           {"from": "Tim", "text": "next week fr", "at": 2.85}],
+  "seen": "Seen by 6", "seen_at": 3.35},
+ {"id": "punch", "type": "card", "dur": 1.9, "title": "GTA 6 took my\nwhole [group chat].", "size": 116},
+ {"id": "app", "type": "phonestill", "dur": 2.9, "shot": "appstore/lure-appstore-1-map.png", "title": "Get them back on\nthe [real map].", "sub": "Vote on tonight's spot. One wins at 21:00."},
+ {"id": "ask", "type": "card", "dur": 2.4, "title": "How many of your\nfriends did [GTA 6] take?", "sub": "Give a number 👇", "size": 100},
+ {"id": "end", "type": "end", "dur": 1.9, "title": "Plan. Post. Meet.", "sub": "Free on iPhone"}
+]}

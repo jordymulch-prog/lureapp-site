@@ -1,6 +1,14 @@
 # Lure: the marketing story (read before every post)
 
-## MORE LIFE (Jordy, 27 Nov 2026). This goes before everything below.
+## MORE LIFE, round 2 (Jordy, 27 Nov 2026, after seeing daans-pick-2). Overrides the round-1 points below where they conflict.
+Jordy: daans-pick-2 (multi-shot Kling, HUD, whooshes) was *still too boring, looks too AI, the transitions are ugly*; "it has to be more extreme", ride what is popular right now (GTA 6) and what people like to copy.
+1. **Meme-native beats cinematic.** Build on a format that is going viral this week (copy the structure and the joke, never the assets): before/after slides, group-chat screenshots, POV text, "us now vs us on <date>". Make the joke about friends and going out, so Lure is the honest punchline.
+2. **No AI faces as the hook or the main content.** Real footage/photos from Jordy first; otherwise graphics (chat, cards, the real app). If a crew shot is used, it is short and never the first frame. (Whether the crew stays at all is Jordy's call: ask him with the numbers.)
+3. **Transitions: hard cuts on the beat only.** No whooshes, no zoom/push-in transitions, no slide-ins. Life comes from the content changing (a message popping in, a punchline card), not from effects.
+4. **Trend characters and assets are never used** (e.g. GTA 6's Lucia, also no look-alike, not as a slogan): takedown/strike risk. Naming the game in the hook/caption is fine (Jordy, 27 Nov).
+5. **Trending audio** can't be added via Windsor. When a trend lives on a sound, offer Jordy to post that one himself in the app.
+
+## MORE LIFE, round 1 (Jordy, 27 Nov 2026).
 Jordy, after ask-hq-2: "Still a bit boring. It needs more life. It attracts too few people. Change the strategy." He had said the same on 20 Nov ("lively, no boring mood shots with text"). What was boring: every Reel was one person standing still for 6 s in the same office, then the same static map screenshot twice, then a dark end card. Nothing happens, we never show a night out, quiet music.
 
 The format from now on (first one: daans-pick-2, 27 Nov):

@@ -209,6 +209,59 @@ body{{background:transparent}}
 <div class="mm"><img src="file://{mm}"><div class="arrow"></div></div><div class="mmlabel">LURE MAP</div></body></html>"""
 
 
+def chat_html(s):
+    """Meme-style group chat (generic UI, no app brands). Messages pop in at their 'at' time (s).
+    s: {"top": "my friends before\nNovember 19th", "group": "Friday crew", "msgs": [{"from": "Sam", "text": "...", "at": 0.3, "me": false}], "seen": "Seen by 6"}"""
+    rows = []
+    for m in s.get("msgs", []):
+        side = "me" if m.get("me") else "them"
+        who = "" if m.get("me") else f'<div class="who">{esc(m.get("from", ""))}</div>'
+        rows.append(f'<div class="m {side}" style="animation-delay:{m["at"]}s">{who}<div class="bub">{esc(m["text"])}</div></div>')
+    seen = f'<div class="seen" style="animation-delay:{s.get("seen_at", 0)}s">{esc(s["seen"])}</div>' if s.get("seen") else ""
+    return f"""<html><head><style>{BASE}
+body{{background:{s.get('bg', '#0C0B12')}}}
+.top{{position:absolute;top:110px;left:50px;right:50px;text-align:center;font-weight:700;font-size:84px;line-height:1.02;color:#fff}}
+.top em{{font-style:normal;color:#FF6A3D}}
+.phone{{position:absolute;top:400px;left:70px;right:70px;bottom:400px;background:#17161F;border-radius:60px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.6)}}
+.bar{{height:130px;background:#22212C;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:40px;color:#fff;gap:18px}}
+.bar i{{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#FF6A3D,#3DD6C4);display:inline-block}}
+.list{{padding:30px 34px;display:flex;flex-direction:column;gap:18px}}
+.m{{opacity:0;animation:pop .18s ease-out forwards;max-width:80%}}
+.them{{align-self:flex-start}}.me{{align-self:flex-end;text-align:right}}
+.who{{font-size:26px;color:#9a98a8;margin:0 0 6px 18px;font-weight:600}}
+.bub{{display:inline-block;font-size:44px;line-height:1.2;padding:20px 30px;border-radius:38px;color:#fff;background:#2E2D3A;font-weight:500}}
+.me .bub{{background:#FF6A3D;color:#1A0B05}}
+.seen{{opacity:0;animation:pop .15s forwards;align-self:flex-end;font-size:30px;color:#9a98a8;margin:6px 40px 0 0}}
+@keyframes pop{{from{{opacity:0;transform:scale(.85) translateY(20px)}}to{{opacity:1;transform:none}}}}
+</style></head><body><div class="top">{esc(s.get('top')).replace('[', '<em>').replace(']', '</em>')}</div>
+<div class="phone"><div class="bar"><i></i>{esc(s.get('group', 'group chat'))}</div><div class="list">{''.join(rows)}{seen}</div></div></body></html>"""
+
+
+def card_html(s):
+    """Hard meme card: big text, no animation (cuts do the work)."""
+    return f"""<html><head><style>{BASE}
+body{{background:{s.get('bg', '#0C0B12')};display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 70px 200px}}
+h1{{font-size:{s.get('size', 120)}px;line-height:1.02;color:{s.get('color', '#fff')}}}
+h1 em{{font-style:normal;color:#FF6A3D}}
+.sub{{margin-top:40px;font-size:52px;font-weight:700;color:{s.get('subcolor', '#3DD6C4')}}}
+</style></head><body><h1>{esc(s.get('title')).replace('[', '<em>').replace(']', '</em>')}</h1>{f'<div class="sub">{esc(s["sub"])}</div>' if s.get('sub') else ''}</body></html>"""
+
+
+def phonestill_html(s):
+    """The real app screenshot, no entrance animation (for hard-cut meme edits), slow zoom only."""
+    img = crop_phone(s["shot"])
+    return f"""<html><head><style>{BASE}
+body{{background:#0C0B12}}
+.top{{position:absolute;top:120px;left:50px;right:50px;text-align:center}}
+h1{{font-size:{s.get('size', 88)}px}} h1 em{{font-style:normal;color:#FF6A3D}}
+.sub{{margin-top:18px;font-size:42px;font-weight:600;opacity:.9}}
+.ph{{position:absolute;left:50%;top:{s.get('phone_top', 470)}px;width:820px;transform:translateX(-50%)}}
+.ph img{{width:100%;display:block;border-radius:112px 112px 0 0;animation:zoom {s['dur']}s linear both;transform-origin:50% 30%}}
+@keyframes zoom{{from{{transform:scale(1)}}to{{transform:scale(1.05)}}}}
+</style></head><body><div class="top"><h1>{esc(s.get('title')).replace('[', '<em>').replace(']', '</em>')}</h1>{f'<div class="sub">{esc(s["sub"])}</div>' if s.get('sub') else ''}</div>
+<div class="ph"><img src="file://{img}"></div></body></html>"""
+
+
 def main(path):
     spec = json.load(open(path))
     outdir = os.path.join(ROOT, spec["dir"])
@@ -225,7 +278,7 @@ def main(path):
                 pg.screenshot(path=os.path.join(outdir, s["id"] + ".png"), omit_background=True)
                 pg.close()
                 continue
-            open(page_file, "w").write({"phone": phone_html, "end": end_html, "mapzoom": mapzoom_html, "ab": ab_html}[s["type"]](s))
+            open(page_file, "w").write({"phone": phone_html, "end": end_html, "mapzoom": mapzoom_html, "ab": ab_html, "chat": chat_html, "card": card_html, "phonestill": phonestill_html}[s["type"]](s))
             ctx = b.new_context(viewport={"width": W, "height": H}, record_video_dir=tmp, record_video_size={"width": W, "height": H})
             pg = ctx.new_page()
             pg.goto("file://" + page_file)

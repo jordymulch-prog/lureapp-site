@@ -10,7 +10,7 @@ compose.json:
     "punch": 1.08},                                                            # optional slow push-in (end scale)
    {"src": "ig/jobs/<name>/zoom.mp4", "dur": 1.9}],
  "music": "ig/jobs/<name>/music.mp3", "music_vol": [[0, 0.18], [4.0, 0.55]],    # volume steps over the whole Reel
- "whoosh_at": [4.0, 6.3], "cover_at": 0.5}
+ "whoosh_at": [4.0, 6.3], "blip_at": [0.1, 0.5], "cover_at": 0.5}
 Every 1-2 s something changes: that is the point (Jordy, 27 Nov 2026: "more life").
 """
 import json
@@ -85,6 +85,13 @@ def main(path):
             fc += (f"[{n}:a]highpass=f=600,lowpass=f=5000,afade=t=in:d=0.3,afade=t=out:st=0.3:d=0.15,volume=0.5,"
                    f"aformat=channel_layouts=stereo,adelay={int(max(0, at - 0.3) * 1000)}|{int(max(0, at - 0.3) * 1000)}[w{k}];")
             labels.append(f"[w{k}]")
+            n += 1
+        for k, at in enumerate(job.get("blip_at", [])):
+            # short message 'pop' (synthetic sine), e.g. when a chat bubble appears
+            mix_in += ["-f", "lavfi", "-t", "0.07", "-i", "sine=frequency=1320:sample_rate=48000"]
+            fc += (f"[{n}:a]afade=t=out:st=0.02:d=0.05,volume=0.35,aformat=channel_layouts=stereo,"
+                   f"adelay={int(at * 1000)}|{int(at * 1000)}[b{k}];")
+            labels.append(f"[b{k}]")
             n += 1
         fc += "".join(labels) + f"amix=inputs={len(labels)}:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[a]"
         run([*mix_in, "-filter_complex", fc, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
