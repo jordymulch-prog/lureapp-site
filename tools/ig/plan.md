@@ -50,6 +50,8 @@ Budget on 24 Nov: 73 credits until 20 Dec. One 6 s Kling 3.0 shot = 12 credits, 
 
 **Ready posts (24 Nov):** an entry in `ig/log.json` with `"status": "ready"` is already made (video, cover, caption). On its `ready_for` date (or later, if a run was missed) the run posts THAT file via Windsor instead of making a new post, then sets `"status": "posted"` and the media_id. First check with Windsor that nothing was posted today already (no double posts). Posts marked "post on Friday" are only used on a Friday; on other days take the next post.
 
+**Fri 27 Nov: NO automated post.** Jordy posts gta-friends himself in the Instagram app (with a song from Instagram's library). The 27 Nov run only does the learning part. If Windsor shows no post from him by the next run, mention it to Jordy and continue with the queue.
+
 **MORE LIFE update (27 Nov, Jordy):** every post below is now made in the lively format of `lure-marketing.md` "MORE LIFE" (outdoors, multi-shot, cuts every 1-2 s, push-ins, loud beat, our own open-world HUD; trend hooks allowed by name, never their assets). Budget stays 200/month: Higgsfield balance 26 credits on 27 Nov until 20 Dec = **one more full crew Reel (~15 cr)**, the rest 0-5 credit lively posts that re-cut footage we already have. Reworked queue:
 - Fri 27 Nov: **daans-pick-2** (ready; GTA 6 hook, Daan street → bar → club, "A or B?").
 - Sat 28: **mila-maps** as 0-2 credit version: real Lure map zooms into 3 real Amsterdam spots (database, team tips), kinetic text, HUD "Side quests", "Which city next? Name it." No new Kling.
