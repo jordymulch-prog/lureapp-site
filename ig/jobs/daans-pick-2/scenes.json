@@ -1,0 +1,9 @@
+{"dir": "ig/jobs/daans-pick-2", "scenes": [
+ {"id": "h0", "type": "hud", "big": "GTA 6 is out.\nYour city still has\n[better graphics.]", "size": 92},
+ {"id": "h1", "type": "hud", "mission": "Pick where Daan goes tonight", "mission_top": 170},
+ {"id": "hA", "type": "hud", "mission_label": "OPTION A", "mission": "", "letter": "A", "color": "#FF6A3D", "name": "Brouwerij 't IJ", "tip": "A beer where it's brewed", "choice_top": 190},
+ {"id": "hB", "type": "hud", "letter": "B", "color": "#3DD6C4", "name": "Melkweg", "tip": "Club nights in an old dairy factory", "choice_top": 190},
+ {"id": "zoom", "type": "mapzoom", "shot": "appstore/lure-appstore-1-map.png", "dur": 1.9, "title": "The minimap for\nyour [real city]", "sub": "Both spots are on the Lure map"},
+ {"id": "ab", "type": "ab", "dur": 2.3, "a": "A", "b": "B", "title": "Choose his mission.\nComment the [letter].", "sub": "Daan goes where you send him"},
+ {"id": "end", "type": "end", "dur": 1.8, "title": "Plan. Post. Meet.", "sub": "Free on iPhone"}
+]}
