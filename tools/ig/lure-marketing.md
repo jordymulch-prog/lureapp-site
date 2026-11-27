@@ -1,5 +1,19 @@
 # Lure: the marketing story (read before every post)
 
+## MORE LIFE (Jordy, 27 Nov 2026). This goes before everything below.
+Jordy, after ask-hq-2: "Still a bit boring. It needs more life. It attracts too few people. Change the strategy." He had said the same on 20 Nov ("lively, no boring mood shots with text"). What was boring: every Reel was one person standing still for 6 s in the same office, then the same static map screenshot twice, then a dark end card. Nothing happens, we never show a night out, quiet music.
+
+The format from now on (first one: daans-pick-2, 27 Nov):
+1. **Show the night, not the office.** The crew is outside: canal street, bike, bar, club queue, dance floor, terrace. The office only as a rare contrast.
+2. **Something changes every 1-2 seconds:** 5-8 cuts in 12-16 s, slow push-ins on every shot, text that slams in, whooshes on the cuts (made with ffmpeg, no third-party audio), upbeat music loud after the speech (ElevenLabs Music, ~2 credits).
+3. **One Kling 3.0 Omni multi-shot generation per crew Reel** (`kling_o3_image_reference`, 10 s, 3 shots, sound on, crew still as reference, ~12.5 credits): shot 1 the crew member talking (max ~8 words), shots 2-3 the payoff (the bar, the club, the meet-up). Gives 3 locations for the price of 1.
+4. **Story with a payoff:** problem or choice → the real Lure app (map zoom with a pulsing pin, `scenes.py` type `mapzoom`) → the night actually happens → the one-word question (`ab` card) → end card.
+5. **Ride what people talk about this week** (game launches, Sinterklaas, exams, Christmas markets, a meme format), honestly: our own visuals only. **Trend hooks may name the thing** (Jordy asked for GTA 6 on 27 Nov), but never use its footage, logo, characters, music, fonts or signature screens ("Mission passed", wanted stars). Our own open-world HUD (`scenes.py` type `hud`: mission box + the real Lure map as minimap) is the series look: **"Real-life open world"**.
+6. **Budget stays 200 a month (Jordy, 27 Nov).** Alternate: a full crew Reel (~15 credits) every other day, and in between lively 0-5 credit posts: re-cut crew footage we already have (fetch it with a `*.fetch.json` job), the real app with motion, kinetic text, HUD. Never a static post.
+7. Cut locally with `tools/ig/compose_local.py` (segments, timed overlays, push-ins, music volume steps, whooshes) after fetching the Higgsfield media into `ig/jobs/<name>/`.
+8. Keep the instagram safe zones: nothing important in the bottom ~420 px (caption, username) or the right edge (buttons).
+
+
 ## Learning loop (Jordy, 24 Nov 2026)
 Every run follows `tools/ig/skills/learning/SKILL.md`: read `ig/learnings.md` (playbook + open experiment) before making the post; after posting measure, diagnose the weakest funnel stage, research (incl. trends), run one experiment at a time and update `ig/learnings.md` and `plan.md`. The playbook rules there apply on top of this file, never against its hard rules or Jordy's own decisions.
 

@@ -24,6 +24,7 @@ Update 26 Nov: no new Reel judged yet (ask-hq-2 went live 26 Nov, judge 28 Nov).
 4. **Every post must work for strangers.** Most views come from non-followers on the day of the post, so no "as you saw yesterday" without context. *Evidence: 21-23 Nov daily reach split.*
 5. **Daily posting stays (Jordy's decision); quality of the first seconds beats more posts.** *Evidence: we post 7/week, above Buffer's 3-5 "sweet spot"; Buffer and Mosseri both say more posts help but quality matters most.*
 6. **Always keep 1-2 posts "ready" in the log.** A missed day is a zero-reach day, so a finished post must be waiting for the next run. When a run has time left after the learning part, it prepares the next post as `"status": "ready"`. *Evidence: 24-25 Nov 0 account reach without a post; the ready ask-hq-2 could still go out on 26 Nov.*
+8. **More life (Jordy, 27 Nov): outdoors, a cut every 1-2 s, payoff shown, loud beat.** See `lure-marketing.md` "MORE LIFE". *Evidence: Jordy's verdict on posts 1-4 + every static Reel lost 83-93 % in 3 s; tested from daans-pick-2 (E5).*
 7. **The hook line is always on screen as text from 0.0 s,** never only spoken. *Evidence: Mosseri (via nowbam, Nov 2025): about half of people scroll with sound off; a hook can be verbal, visual or audio. Our crew Reels speak the hook, so the text must carry it too.*
 
 ## Open experiments (one variable per post)
@@ -32,6 +33,7 @@ Update 26 Nov: no new Reel judged yet (ask-hq-2 went live 26 Nov, judge 28 Nov).
 | E1 | Viewers skip because the first frame is static/slow | Open mid-action: crew member already talking + the hook line on screen at 0.0 s, no intro | skip rate, avg watch | skip < 85 %, watch > 3 s | ask-hq-2 (post 4, live 26 Nov 18:49; judge 28 Nov) | running |
 | E2 | The real app on screen first hooks better than a face | Trial Reel version B of each crew Reel: open on the app moment with the hook line, then the crew shot | skip rate A vs B | B beats A by 5+ points | from post 5 | queued |
 | E3 | A one-word A/B question gets more comments than an open question | A/B prompt ("Bar or club?") vs open prompt | comments per reach | > 0, then beat the previous | posts 5-6 vs 4 | queued (daans-pick, Fri 27 Nov) |
+| E5 | A lively, outdoor, fast-cut Reel with a trend hook holds viewers far better than our static Reels | daans-pick-2: multi-shot (street → bar → club), push-ins, whooshes, open-world HUD, hook "GTA 6 is out. Your city still has better graphics." (Jordy's order; many variables at once on purpose) | skip rate, avg watch, reach, comments | skip < 75 %, watch > 4 s, reach > 81 | daans-pick-2 (27 Nov) | running |
 | E4 | A relatable situation people send to one friend gets shares (Instagram's strongest signal for reaching non-followers) | On-screen line "Send this to the friend who …" next to the one-word question (caption keeps one question) | shares per reach | ≥ 1 share per 50 reach | lotte-friday-1 | queued |
 
 ## Closed experiments
@@ -50,3 +52,4 @@ Update 26 Nov: no new Reel judged yet (ask-hq-2 went live 26 Nov, judge 28 Nov).
 ## Changelog
 - 2026-11-24: learning loop started (Jordy). Baseline from the first 5 posts, rules 1-5, experiments E1-E3.
 - 2026-11-26: four-taps judged (reach 1): rule 2 confirmed. Rule 6 added (keep ready posts) because the missed 25 Nov run and no post on 24 Nov gave 0 reach on both days. Rule 7 added (hook as on-screen text, sound-off viewers). E4 queued (send-to-a-friend). E1 running on ask-hq-2.
+- 2026-11-27: Jordy: posts still too boring, "more life", and use GTA 6 (out since 19 Nov). New format (rule 8, `lure-marketing.md` MORE LIFE), daans-pick replaced by daans-pick-2, E5 started. Budget stays 200/month (Jordy).

@@ -127,7 +127,7 @@ body{{background:radial-gradient(900px 900px at 50% 45%,rgba(255,106,61,.6),tran
 @keyframes push{{0%{{transform:translateX(-50%) translateY(260px) scale(.9);opacity:0}}18%{{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}100%{{transform:translateX(-50%) translateY(0) scale(1.4)}}}}
 .pin{{position:absolute;left:50%;top:860px;width:90px;height:90px;margin-left:-45px;border-radius:50%;background:#FF6A3D;border:10px solid #fff;box-shadow:0 0 0 0 rgba(255,106,61,.7);animation:fade .2s .45s both,pulse .8s .5s infinite}}
 @keyframes pulse{{0%{{box-shadow:0 0 0 0 rgba(255,106,61,.75)}}100%{{box-shadow:0 0 0 70px rgba(255,106,61,0)}}}}
-.top{{position:absolute;bottom:0;left:0;right:0;padding:120px 60px 170px;text-align:center;background:linear-gradient(180deg,rgba(12,11,18,0),rgba(12,11,18,.92) 35%,#0C0B12);z-index:5}}
+.top{{position:absolute;bottom:0;left:0;right:0;padding:120px 60px 430px;text-align:center;background:linear-gradient(180deg,rgba(12,11,18,0),rgba(12,11,18,.92) 25%,#0C0B12);z-index:5}}
 h1{{font-size:92px;animation:slam .35s .05s cubic-bezier(.2,1.5,.4,1) both;text-shadow:0 8px 30px rgba(0,0,0,.5)}}
 h1 em{{font-style:normal;color:#FF6A3D}}
 .sub{{margin-top:16px;font-size:42px;font-weight:600;animation:up .4s .3s both}}
@@ -201,10 +201,10 @@ body{{background:transparent}}
 .badge{{width:170px;height:170px;border-radius:40px;display:flex;align-items:center;justify-content:center;font-size:132px;font-weight:700;color:#0C0B12;flex:none;border:6px solid #fff;box-shadow:0 14px 40px rgba(0,0,0,.5)}}
 .ch b{{display:block;font-size:72px;line-height:1.02;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:0 6px 0 rgba(0,0,0,.5)}}
 .ch span{{display:block;margin-top:10px;font-size:40px;font-weight:600;text-shadow:0 3px 14px rgba(0,0,0,.95)}}
-.mm{{position:absolute;left:56px;bottom:150px;width:300px;height:300px;border-radius:50%;overflow:hidden;border:8px solid rgba(255,255,255,.92);box-shadow:0 0 0 6px rgba(0,0,0,.55),0 20px 50px rgba(0,0,0,.5)}}
+.mm{{position:absolute;left:56px;bottom:430px;width:300px;height:300px;border-radius:50%;overflow:hidden;border:8px solid rgba(255,255,255,.92);box-shadow:0 0 0 6px rgba(0,0,0,.55),0 20px 50px rgba(0,0,0,.5)}}
 .mm img{{width:100%;height:100%;object-fit:cover}}
 .arrow{{position:absolute;left:50%;top:50%;width:0;height:0;margin:-30px 0 0 -20px;border-left:20px solid transparent;border-right:20px solid transparent;border-bottom:50px solid #FF6A3D;filter:drop-shadow(0 0 4px #fff)}}
-.mmlabel{{position:absolute;left:56px;bottom:100px;width:300px;text-align:center;font-weight:700;font-size:30px;letter-spacing:3px;text-shadow:0 2px 10px #000}}
+.mmlabel{{position:absolute;left:56px;bottom:380px;width:300px;text-align:center;font-weight:700;font-size:30px;letter-spacing:3px;text-shadow:0 2px 10px #000}}
 </style></head><body><div class="shade"></div>{big}{mission}{choice}
 <div class="mm"><img src="file://{mm}"><div class="arrow"></div></div><div class="mmlabel">LURE MAP</div></body></html>"""
 
