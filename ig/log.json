@@ -18,8 +18,8 @@
    "shares": 0,
    "saves": 0,
    "likes": 1,
-   "checked": "2026-11-26",
-   "age_h": 144,
+   "checked": "2026-11-27",
+   "age_h": 166,
    "judged": true
   }
  },
@@ -44,13 +44,13 @@
    "reach": 81,
    "views": 98,
    "skip_rate": 0.921,
-   "avg_watch_s": 1.93,
+   "avg_watch_s": 1.925,
    "comments": 0,
    "shares": 1,
    "saves": 0,
    "likes": 1,
-   "checked": "2026-11-26",
-   "age_h": 126,
+   "checked": "2026-11-27",
+   "age_h": 148,
    "judged": true
   }
  },
@@ -75,13 +75,13 @@
    "reach": 14,
    "views": 16,
    "skip_rate": 0.929,
-   "avg_watch_s": 1.78,
+   "avg_watch_s": 1.784,
    "comments": 0,
    "shares": 0,
    "saves": 0,
    "likes": 0,
-   "checked": "2026-11-26",
-   "age_h": 102,
+   "checked": "2026-11-27",
+   "age_h": 123,
    "judged": true
   }
  },
@@ -118,8 +118,8 @@
    "likes": 0,
    "follows": 0,
    "profile_visits": 0,
-   "checked": "2026-11-26",
-   "age_h": 72,
+   "checked": "2026-11-27",
+   "age_h": 94,
    "judged": true
   }
  },
@@ -140,15 +140,17 @@
   "media_id": "18382658548240817",
   "posted_at": "2026-11-26T17:49:41Z",
   "stats": {
-   "reach": 0,
-   "views": 0,
+   "reach": 7,
+   "views": 9,
    "comments": 0,
    "shares": 0,
    "saves": 0,
-   "likes": 0,
-   "checked": "2026-11-26",
-   "age_h": 0,
-   "judged": false
+   "likes": 1,
+   "checked": "2026-11-27",
+   "age_h": 22,
+   "judged": false,
+   "skip_rate": 0.857,
+   "avg_watch_s": 2.184
   }
  },
  {
@@ -203,7 +205,7 @@
   "experiment": "E6 (trend meme, no AI faces, hard cuts on the beat; send-to-a-friend situation)",
   "status": "manual_by_jordy",
   "ready_for": "2026-11-27 19:00 Europe/Amsterdam",
-  "note": "Jordy 27 Nov: daans-pick-2 still too boring/too AI, transitions ugly; wanted the GTA 6 'Lucia' trend. Lucia (Rockstar character) NOT used in image or as slogan (IP/strike risk; Lure is not a dating app). Same joke as the trend ('us now' vs 'us on November 19th') but about friends: fictional group chat before/after 19 Nov -> punch card -> real Lure map + vote -> one-number question -> end card. 15.9 s, generic chat UI (no app brands), message pops synthesized, music re-used (ElevenLabs job dbe86df6). No AI people -> no AI label needed. The run posts THIS file tonight (Jordy: 'plaats jij hem'). | 27 Nov: Jordy wants the song 'Flower in a Hurricane' on it. Copyrighted music can't go in our file or via Windsor, so Jordy posts this one himself in the Instagram app with the song from Instagram's own music library (file without music: ig/gta-friends-nomusic.mp4). The run does NOT post it and posts nothing else today; fill in media_id/stats when it shows up in Windsor.",
+  "note": "Jordy 27 Nov: daans-pick-2 still too boring/too AI, transitions ugly; wanted the GTA 6 'Lucia' trend. Lucia (Rockstar character) NOT used in image or as slogan (IP/strike risk; Lure is not a dating app). Same joke as the trend ('us now' vs 'us on November 19th') but about friends: fictional group chat before/after 19 Nov -> punch card -> real Lure map + vote -> one-number question -> end card. 15.9 s, generic chat UI (no app brands), message pops synthesized, music re-used (ElevenLabs job dbe86df6). No AI people -> no AI label needed. The run posts THIS file tonight (Jordy: 'plaats jij hem'). | 27 Nov: Jordy wants the song 'Flower in a Hurricane' on it. Copyrighted music can't go in our file or via Windsor, so Jordy posts this one himself in the Instagram app with the song from Instagram's own music library (file without music: ig/gta-friends-nomusic.mp4). The run does NOT post it and posts nothing else today; fill in media_id/stats when it shows up in Windsor. | 27 Nov 16:55 run: not yet visible in Windsor (cached data); Jordy planned to post it himself tonight. Next run: fill in media_id/stats.",
   "file_manual": "ig/gta-friends-nomusic.mp4"
  }
 ]

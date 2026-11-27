@@ -57,7 +57,7 @@ Budget on 24 Nov: 73 credits until 20 Dec. One 6 s Kling 3.0 shot = 12 credits, 
 - Sat 28: **mila-maps** as 0-2 credit version: real Lure map zooms into 3 real Amsterdam spots (database, team tips), kinetic text, HUD "Side quests", "Which city next? Name it." No new Kling.
 - Sun 29: **yusuf-feature** 0-credit: Get home safe / Friends screens with motion + kinetic text "You can send one friend your live location until you're home" (check the app first), "What should we build next?"
 - Mon 30: **results-1** 0-credit: re-cut daans-pick-2 footage: "You picked A/B" with the REAL comment counts (or honestly: "No votes yet, so Daan picked"), then the winner shot.
-- Tue 1-Thu 3 Dec: new list (posts 11+), lively 0-5 credit versions, December hooks (exam week, Sinterklaas 5 Dec, Christmas markets).
+- Tue 1-Thu 3 Dec: new list (posts 11+), lively 0-5 credit versions, December hooks (exam week, Sinterklaas 5 Dec, Christmas markets). Candidate (27 Nov research): **"Lure night calendar"**, 1-24 Dec, every day one door opens on a REAL spot from the Lure map (database + team tip), hard cuts, one-word question ("Been here? Yes/no"). 0 credits. Decide in the 30 Nov run after E6 (gta-friends) has numbers; GTA 6 hooks only until ~3 Dec.
 - Fri 4 Dec: **lotte-friday-1** = the one full crew Reel left (~15 cr, multi-shot: sofa → vote on Lure → bar), with E4.
 Old order notes below stay for reference.
 
