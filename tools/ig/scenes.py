@@ -10,6 +10,7 @@ scenes.json: {"dir": "ig/jobs/<name>", "scenes": [
   {"id": "zoom",  "type": "mapzoom", "shot": "appstore/lure-appstore-1-map.png", "dur": 1.8, "title": "Both on the [Lure map]", "sub": "..."},  # phone fills the screen, camera pushes in
   {"id": "ab",    "type": "ab", "dur": 2.0, "a": "A", "b": "B", "title": "Comment the [letter]", "sub": "..."},  # kinetic comment prompt
   {"id": "h1",    "type": "hud", "big": "Top text", "mission": "Pick tonight's spot", "letter": "A", "name": "Spot", "tip": "tip"},  # own game-style HUD, real Lure map as minimap
+  {"id": "q1",    "type": "quest", "dur": 1.7, "n": "1", "name": "Spot", "cat": "Bar", "tip": "real team tip", "fx": 0.4, "fy": 0.5},  # side-quest card on the real map
   {"id": "lA",    "type": "label", "letter": "A", "name": "Spot", "tip": "tip", "hook": "optional hook box"}  # transparent PNG
 ]}
 Phone scenes use the real App Store screenshots (the phone part is cropped out and animated).
@@ -262,6 +263,34 @@ h1{{font-size:{s.get('size', 88)}px}} h1 em{{font-style:normal;color:#FF6A3D}}
 <div class="ph"><img src="file://{img}"></div></body></html>"""
 
 
+def quest_html(s):
+    """Side-quest card (0 credits): the real Lure map fills the screen (darkened, slow drift), a pin pulses,
+    mission box + big number badge + REAL spot name, category and Lure team tip from the database.
+    s: {"n": "1", "of": "3", "name": "Foodhallen", "cat": "Street food", "tip": "...", "fx": 0.45, "fy": 0.55, "color": "#FF6A3D"}"""
+    im = Image.open(crop_phone(s.get("shot", "appstore/lure-appstore-1-map.png")))
+    w, h = im.size
+    out = os.path.join(tempfile.gettempdir(), "questmap.png")
+    im.crop((0, int(h * 0.30), w, int(h * 0.75))).save(out)
+    fx, fy = s.get("fx", 0.5), s.get("fy", 0.5)
+    return f"""<html><head><style>{BASE}
+body{{background:#0C0B12;overflow:hidden}}
+.map{{position:absolute;left:-40%;top:-10%;width:180%;height:120%;background:url(file://{out}) {fx*100}% {fy*100}%/cover;filter:saturate(1.2) brightness(.55);animation:drift {s['dur']}s linear both}}
+@keyframes drift{{from{{transform:scale(1.15) translate(0,0)}}to{{transform:scale(1.25) translate(-30px,-20px)}}}}
+.pin{{position:absolute;left:50%;top:1010px;width:100px;height:100px;margin-left:-50px;border-radius:50%;background:{s.get('color', '#FF6A3D')};border:12px solid #fff;animation:pulse .7s infinite}}
+@keyframes pulse{{0%{{box-shadow:0 0 0 0 rgba(255,255,255,.7)}}100%{{box-shadow:0 0 0 80px rgba(255,255,255,0)}}}}
+.mis{{position:absolute;top:150px;left:56px;background:rgba(10,10,14,.85);border-left:14px solid {s.get('color', '#FF6A3D')};border-radius:12px;padding:20px 32px;font-weight:700;font-size:44px;letter-spacing:5px;color:{s.get('color', '#FF6A3D')}}}
+.ch{{position:absolute;top:330px;left:56px;right:56px;display:flex;align-items:center;gap:30px}}
+.badge{{width:200px;height:200px;border-radius:46px;display:flex;align-items:center;justify-content:center;font-size:160px;font-weight:700;color:#0C0B12;flex:none;background:{s.get('color', '#FF6A3D')};border:7px solid #fff;box-shadow:0 14px 40px rgba(0,0,0,.5)}}
+.ch b{{display:block;font-size:{s.get('size', 84)}px;line-height:1.0;-webkit-text-stroke:3px #000;paint-order:stroke fill;text-shadow:0 6px 0 rgba(0,0,0,.5)}}
+.ch span{{display:block;margin-top:12px;font-size:40px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#3DD6C4;text-shadow:0 3px 12px #000}}
+.tip{{position:absolute;top:1180px;left:70px;right:70px;text-align:center;background:#fff;color:#0C0B12;border-radius:34px;padding:30px 36px;font-weight:700;font-size:54px;line-height:1.12;box-shadow:0 18px 50px rgba(0,0,0,.45)}}
+.tip small{{display:block;font-size:30px;letter-spacing:4px;color:#FF6A3D;margin-bottom:8px}}
+</style></head><body><div class="map"></div><div class="pin"></div>
+<div class="mis">SIDE QUEST {esc(s.get('n'))}/{esc(s.get('of', '3'))}</div>
+<div class="ch"><div class="badge">{esc(s.get('n'))}</div><div><b>{esc(s.get('name'))}</b><span>{esc(s.get('cat'))}</span></div></div>
+<div class="tip"><small>LURE TEAM TIP</small>{esc(s.get('tip'))}</div></body></html>"""
+
+
 def main(path):
     spec = json.load(open(path))
     outdir = os.path.join(ROOT, spec["dir"])
@@ -278,7 +307,7 @@ def main(path):
                 pg.screenshot(path=os.path.join(outdir, s["id"] + ".png"), omit_background=True)
                 pg.close()
                 continue
-            open(page_file, "w").write({"phone": phone_html, "end": end_html, "mapzoom": mapzoom_html, "ab": ab_html, "chat": chat_html, "card": card_html, "phonestill": phonestill_html}[s["type"]](s))
+            open(page_file, "w").write({"phone": phone_html, "end": end_html, "mapzoom": mapzoom_html, "ab": ab_html, "chat": chat_html, "card": card_html, "phonestill": phonestill_html, "quest": quest_html}[s["type"]](s))
             ctx = b.new_context(viewport={"width": W, "height": H}, record_video_dir=tmp, record_video_size={"width": W, "height": H})
             pg = ctx.new_page()
             pg.goto("file://" + page_file)

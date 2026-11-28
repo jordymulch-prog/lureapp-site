@@ -1,0 +1,10 @@
+{"dir": "ig/jobs/mila-maps", "scenes": [
+ {"id": "hookA", "type": "card", "dur": 2.0, "title": "GTA 6 map: huge.\n\n[Amsterdam] on\na Saturday:", "size": 120},
+ {"id": "hookB", "type": "phonestill", "dur": 2.0, "shot": "appstore/lure-appstore-1-map.png", "title": "GTA 6 map: huge.\n[Amsterdam] on a Saturday:", "size": 84},
+ {"id": "q1", "type": "quest", "dur": 1.8, "n": "1", "name": "Foodhallen", "cat": "Food hall", "tip": "Lots of stalls. Easy when everyone wants something different.", "fx": 0.35, "fy": 0.6, "color": "#3DD6C4"},
+ {"id": "q2", "type": "quest", "dur": 1.8, "n": "2", "name": "Brouwerij 't IJ", "cat": "Brewery bar", "tip": "Right next to a windmill. Have a beer where it's made.", "fx": 0.6, "fy": 0.3, "color": "#FFC23D", "size": 76},
+ {"id": "q3", "type": "quest", "dur": 1.8, "n": "3", "name": "Melkweg", "cat": "Concerts + club nights", "tip": "Concerts and club nights in a former dairy factory.", "fx": 0.45, "fy": 0.45, "color": "#FF6A3D"},
+ {"id": "zoom", "type": "mapzoom", "dur": 2.2, "shot": "appstore/lure-appstore-1-map.png", "title": "All on the [Lure map].", "sub": "Plus which friends are out. Live."},
+ {"id": "ask", "type": "card", "dur": 2.6, "title": "Which city should\nwe map [next]?", "sub": "Name it 👇", "size": 108},
+ {"id": "end", "type": "end", "dur": 1.9, "title": "Plan. Post. Meet.", "sub": "Free on iPhone"}
+]}

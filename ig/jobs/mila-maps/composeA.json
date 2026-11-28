@@ -1,0 +1,6 @@
+{"out": "ig/mila-maps",
+ "segments": [
+  {"src": "ig/jobs/mila-maps/hookA.mp4", "dur": 2.0}, {"src": "ig/jobs/mila-maps/q1.mp4", "dur": 1.8}, {"src": "ig/jobs/mila-maps/q2.mp4", "dur": 1.8}, {"src": "ig/jobs/mila-maps/q3.mp4", "dur": 1.8},
+  {"src": "ig/jobs/mila-maps/zoom.mp4", "dur": 2.2}, {"src": "ig/jobs/mila-maps/ask.mp4", "dur": 2.6}, {"src": "ig/jobs/mila-maps/end.mp4", "dur": 1.9}],
+ "music": "ig/jobs/mila-maps/music.mp3", "music_vol": [[0, 0.85]],
+ "blip_at": [0.05, 2.0, 3.8, 5.6, 7.4, 9.6], "cover_at": 2.9}

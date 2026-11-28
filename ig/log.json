@@ -207,5 +207,22 @@
   "ready_for": "2026-11-27 19:00 Europe/Amsterdam",
   "note": "Jordy 27 Nov: daans-pick-2 still too boring/too AI, transitions ugly; wanted the GTA 6 'Lucia' trend. Lucia (Rockstar character) NOT used in image or as slogan (IP/strike risk; Lure is not a dating app). Same joke as the trend ('us now' vs 'us on November 19th') but about friends: fictional group chat before/after 19 Nov -> punch card -> real Lure map + vote -> one-number question -> end card. 15.9 s, generic chat UI (no app brands), message pops synthesized, music re-used (ElevenLabs job dbe86df6). No AI people -> no AI label needed. The run posts THIS file tonight (Jordy: 'plaats jij hem'). | 27 Nov: Jordy wants the song 'Flower in a Hurricane' on it. Copyrighted music can't go in our file or via Windsor, so Jordy posts this one himself in the Instagram app with the song from Instagram's own music library (file without music: ig/gta-friends-nomusic.mp4). The run does NOT post it and posts nothing else today; fill in media_id/stats when it shows up in Windsor. | 27 Nov 16:55 run: not yet visible in Windsor (cached data); Jordy planned to post it himself tonight. Next run: fill in media_id/stats.",
   "file_manual": "ig/gta-friends-nomusic.mp4"
+ },
+ {
+  "date": "2026-11-28",
+  "plan": "mila-maps",
+  "pillar": "City spotlight + trend hook (GTA 6), no AI faces",
+  "format": "reel",
+  "title": "GTA 6 map: huge. Amsterdam on a Saturday:",
+  "caption": "GTA 6 map: huge. Amsterdam on a Saturday: 3 side quests from the Lure map.\n\n1. Foodhallen: lots of stalls, easy when everyone wants something different.\n2. Brouwerij 't IJ: have a beer where it's made, right next to a windmill.\n3. Melkweg: concerts and club nights in a former dairy factory.\n\nAll three are on the live Lure map, with a tip from our team, and you see which friends are out (the ones who share it).\n\nWhich city should we map next? Name it.\n\nFree on iPhone · link in bio\n\n#amsterdam #gta6 #saturdaynight #studentlife #goingout #lureapp",
+  "file": "ig/mila-maps.mp4",
+  "cover": "ig/mila-maps.jpg",
+  "file_b": "ig/mila-maps-b.mp4",
+  "cover_b": "ig/mila-maps-b.jpg",
+  "credits": 0,
+  "experiment": "E2 (adapted, Trial Reel hook test): A opens on a text-only meme card, B (Trial Reel, non-followers only) opens on the real Lure map with the same hook line. Everything after 2.0 s identical. Metric: skip rate + avg watch A vs B.",
+  "status": "posting",
+  "spots": "Foodhallen, Brouwerij 't IJ, Melkweg (public.venues, Amsterdam, team tips; tips trimmed, same meaning)",
+  "note": "0-credit version of mila-maps per plan (no new Kling, no crew face: rule 8 no AI faces as hook). New scenes.py type 'quest' (real map background, badge, real spot + team tip). Hard cuts + blips, music re-used (own ElevenLabs track from gta-friends). No AI people -> no AI label needed."
  }
 ]
